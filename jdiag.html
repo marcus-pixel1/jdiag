@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDIAG - 摩托车智能诊断专家</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #ff6b00;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --success: #38a169;
+            --gray-light: #e2e8f0;
+            --gray-dark: #4a5568;
+        }
+        
+        .dark {
+            --primary: #3b82f6;
+            --secondary: #ff8c38;
+            --dark: #f7fafc;
+            --light: #1a202c;
+            --success: #48bb78;
+            --gray-light: #2d3748;
+            --gray-dark: #cbd5e0;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .brand-title {
+            font-size: 2.5rem;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            color: var(--gray-dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card {
+            background-color: var(--light);
+            color: var(--dark);
+            border: 1px solid var(--gray-light);
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray-light), transparent);
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 24px;
+            text-align: center;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        
+        .product-card {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--light);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--gray-dark);
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+        }
+        
+        .navbar {
+            background-color: var(--light);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+        }
+        
+        .footer {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .stat-card {
+            border-radius: 8px;
+            padding: 1.5rem;
+            background-color: var(--light);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Dark mode toggle */
+        .toggle-dark {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .toggle-dark:before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            background-color: white;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark .toggle-dark:before {
+            transform: translateX(30px);
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .fade-in-1 { animation-delay: 0.1s; }
+        .fade-in-2 { animation-delay: 0.3s; }
+        .fade-in-3 { animation-delay: 0.5s; }
+        .fade-in-4 { animation-delay: 0.7s; }
+        
+        /* Hero background effect */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.9), rgba(0, 36, 79, 0.8)), url('https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&q=80') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.3) 100%);
+        }
+        
+        /* Language selector */
+        .language-selector {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--light);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            min-width: 120px;
+            z-index: 10;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .language-selector:hover .language-options {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .language-option {
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        
+        .language-option:hover {
+            background-color: var(--gray-light);
+        }
+        
+        /* Map visualization */
+        .world-map {
+            position: relative;
+            height: 400px;
+            background-color: var(--gray-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .map-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .map-point::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+        
+        /* For desktop version diagram */
+        .product-comparison {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        
+        .product-column {
+            flex: 1;
+            min-width: 200px;
+            margin: 0 0.5rem;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .product-feature {
+            padding: 0.5rem;
+            border: 1px solid var(--gray-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .new-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center">
+                <span class="text-2xl font-bold text-blue-700">JDIAG</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#mission" class="hover:text-blue-700 transition-colors">品牌使命</a>
+                <a href="#products" class="hover:text-blue-700 transition-colors">产品线</a>
+                <a href="#newproduct" class="hover:text-blue-700 transition-colors">重磅新品</a>
+                <a href="#advantages" class="hover:text-blue-700 transition-colors">为何选择</a>
+                <a href="#global" class="hover:text-blue-700 transition-colors">全球服务</a>
+                <a href="#contact" class="hover:text-blue-700 transition-colors">联系我们</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="language-selector hidden md:block">
+                    <div class="flex items-center cursor-pointer">
+                        <i class="fas fa-globe mr-2 text-blue-700"></i>
+                        <span>中文</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </div>
+                    <div class="language-options">
+                        <div class="language-option">中文</div>
+                        <div class="language-option">English</div>
+                        <div class="language-option">Español</div>
+                        <div class="language-option">Français</div>
+                    </div>
+                </div>
+                
+                <div id="darkModeToggle" class="toggle-dark"></div>
+                
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden w-full bg-white border-t">
+            <div class="container mx-auto px-4 py-2">
+                <a href="#mission" class="block py-2 hover:text-blue-700">品牌使命</a>
+                <a href="#products" class="block py-2 hover:text-blue-700">产品线</a>
+                <a href="#newproduct" class="block py-2 hover:text-blue-700">重磅新品</a>
+                <a href="#advantages" class="block py-2 hover:text-blue-700">为何选择</a>
+                <a href="#global" class="block py-2 hover:text-blue-700">全球服务</a>
+                <a href="#contact" class="block py-2 hover:text-blue-700">联系我们</a>
+                <div class="py-2">
+                    <select class="bg-gray-100 rounded py-1 px-2 w-full">
+                        <option>中文</option>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center text-white pt-16">
+        <div class="container mx-auto px-4 py-20 flex flex-col items-center text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-fade-in opacity-0 fade-in-1">
+                Jdiag -- 让每一辆摩托车，拥有精准的"健康诊断"
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto animate-fade-in opacity-0 fade-in-2">
+                全球摩托车诊断设备革新者 | 覆盖100+车型 | 赋能3万+专业技师
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 animate-fade-in opacity-0 fade-in-3">
+                <a href="#products" class="btn-primary px-8 py-3 rounded-full font-bold text-lg">
+                    探索产品线
+                </a>
+                <a href="#contact" class="btn-secondary px-8 py-3 rounded-full font-bold text-lg">
+                    联系我们
+                </a>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl animate-fade-in opacity-0 fade-in-4">
+                <div class="stat-card text-center">
+                    <i class="fas fa-motorcycle text-5xl text-blue-500 mb-4"></i>
+                    <div class="text-4xl font-bold text-gray-800">100+</div>
+                    <div class="text-gray-600">支持车型</div>
+                </div>
+                <div class="stat-card text-center">
+                    <i class="fas fa-globe text-5xl text-blue-500 mb-4"></i>
+                    <div class="text-4xl font-bold text-gray-800">85+</div>
+                    <div class="text-gray-600">服务国家</div>
+                </div>
+                <div class="stat-card text-center">
+                    <i class="fas fa-user-gear text-5xl text-blue-500 mb-4"></i>
+                    <div class="text-4xl font-bold text-gray-800">30,000+</div>
+                    <div class="text-gray-600">专业技师使用</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                    <span class="section-title">品牌使命</span>
+                </h2>
+                <p class="text-xl md:text-2xl leading-relaxed mb-8">
+                    从M100到M500，我们专注一件事：用<span class="highlight">智能诊断技术</span>重新定义摩托车维修标准。
+                </p>
+                <p class="text-lg md:text-xl leading-relaxed">
+                    Jdiag，为摩托车维修而生——从电池性能、电子燃油喷射系统到全车ECU数据，让故障无所遁形。
+                </p>
+                
+                <div class="mt-16 flex justify-center">
+                    <div class="bg-blue-50 p-8 rounded-lg max-w-3xl">
+                        <i class="fas fa-quote-left text-4xl text-blue-500 opacity-30"></i>
+                        <p class="text-lg italic py-4">
+                            "我们坚信，每一辆摩托车都应该获得最科学的诊断和最专业的维修。通过技术创新，我们正在改变全球摩托车维修的方式。"
+                        </p>
+                        <p class="text-right font-semibold">
+                            — Jdiag 创始人
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                <span class="section-title">核心产品线｜技术持续进化</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- M100 Series -->
+                <div class="product-card">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1661418657005-9d0c861815f4?auto=format&fit=crop&q=80" alt="M100系列" class="product-img w-full">
+                        <div class="absolute top-0 right-0 bg-blue-700 text-white px-3 py-1 m-2 rounded-full text-sm">
+                            入门级
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-700">
+                            <i class="fas fa-tools mr-2"></i>M100系列
+                        </h3>
+                        <h4 class="text-xl font-semibold mb-4">重新定义手持诊断效率</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>3.5英寸彩屏｜双系统检测（EFI+电池）｜多语言实时诊断</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>支持本田、雅马哈等12大主流品牌，10秒读取故障码</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg quote">
+                            "像使用智能手机一样简单，却能解决90%的常规故障。"
+                        </div>
+                        
+                        <div class="mt-6">
+                            <a href="#" class="btn-primary inline-block px-6 py-2 rounded-lg text-center">
+                                了解详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- M200 Series -->
+                <div class="product-card">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&q=80" alt="M200系列" class="product-img w-full">
+                        <div class="absolute top-0 right-0 bg-green-600 text-white px-3 py-1 m-2 rounded-full text-sm">
+                            中端
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-700">
+                            <i class="fas fa-cogs mr-2"></i>M200系列
+                        </h3>
+                        <h4 class="text-xl font-semibold mb-4">移动车间里的全能专家</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>热敏打印｜WIFI远程升级｜喷油器波形检测</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>独创4种喷油嘴清洁模式，修复精度提升60%</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg quote">
+                            "冬季电池亏电？TPS传感器校准？M200让维修流程可视化。"
+                        </div>
+                        
+                        <div class="mt-6">
+                            <a href="#" class="btn-primary inline-block px-6 py-2 rounded-lg text-center">
+                                了解详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- M300 Series -->
+                <div class="product-card">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1516900558310-1e3a1b1a04c7?auto=format&fit=crop&q=80" alt="M300系列" class="product-img w-full">
+                        <div class="absolute top-0 right-0 bg-purple-600 text-white px-3 py-1 m-2 rounded-full text-sm">
+                            高端
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-700">
+                            <i class="fas fa-microchip mr-2"></i>M300系列
+                        </h3>
+                        <h4 class="text-xl font-semibold mb-4">专业维修站的首选方案</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>5英寸工业级屏幕｜-40℃极寒环境稳定运行</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>覆盖哈雷、杜卡迪等高端车型，支持6种欧洲语言</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg quote">
+                            "全球500+认证维修中心的选择：它甚至能预判ECU的潜在风险。"
+                        </div>
+                        
+                        <div class="mt-6">
+                            <a href="#" class="btn-primary inline-block px-6 py-2 rounded-lg text-center">
+                                了解详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Product Comparison -->
+            <div class="hidden lg:block mt-20">
+                <h3 class="text-2xl font-bold text-center mb-8">产品规格对比</h3>
+                <div class="product-comparison">
+                    <div class="product-column">
+                        <div class="product-title">规格/功能</div>
+                        <div class="product-feature">屏幕尺寸</div>
+                        <div class="product-feature">电池检测</div>
+                        <div class="product-feature">EFI系统检测</div>
+                        <div class="product-feature">喷油器清洁</div>
+                        <div class="product-feature">波形检测</div>
+                        <div class="product-feature">支持品牌</div>
+                        <div class="product-feature">工作环境</div>
+                        <div class="product-feature">数据打印</div>
+                        <div class="product-feature">远程升级</div>
+                    </div>
+                    <div class="product-column">
+                        <div class="product-title">M100</div>
+                        <div class="product-feature">3.5英寸</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">-</div>
+                        <div class="product-feature">-</div>
+                        <div class="product-feature">12个</div>
+                        <div class="product-feature">标准</div>
+                        <div class="product-feature">-</div>
+                        <div class="product-feature">USB</div>
+                    </div>
+                    <div class="product-column">
+                        <div class="product-title">M200</div>
+                        <div class="product-feature">4.3英寸</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">25个</div>
+                        <div class="product-feature">增强</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">WIFI</div>
+                    </div>
+                    <div class="product-column">
+                        <div class="product-title">M300</div>
+                        <div class="product-feature">5英寸</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">35个</div>
+                        <div class="product-feature">工业级</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">WIFI + 云存储</div>
+                    </div>
+                    <div class="product-column">
+                        <div class="product-title bg-orange-500">M500</div>
+                        <div class="product-feature">10英寸</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">50+个</div>
+                        <div class="product-feature">工业级</div>
+                        <div class="product-feature"><i class="fas fa-check text-green-500"></i></div>
+                        <div class="product-feature">全平台云协作</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- New Product Section -->
+    <section id="newproduct" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                        <span class="section-title">重磅新品｜M500安卓智能诊断平台</span>
+                    </h2>
+                    <div class="mb-8">
+                        <span class="inline-block bg-blue-700 text-white px-3 py-1 rounded-full text-sm mb-4">全新上市</span>
+                        <h3 class="text-2xl font-bold mb-2">10英寸工业平板｜安卓系统｜车型库扩展至50+品牌</h3>
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold mb-4">为什么选择M500？</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-500 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <span class="font-semibold">智能系统平台:</span> 基于安卓10系统，提供类似平板电脑的直观操作体验，可安装维修辅助应用
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-500 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <span class="font-semibold">超广覆盖范围:</span> 支持包括欧美、日系和中国品牌在内的50+摩托车品牌，一台设备满足多种需求
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-500 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <span class="font-semibold">全触控工业屏幕:</span> 10英寸高清显示屏，即使在强光下也清晰可见，支持手套操作
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-500 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <span class="font-semibold">多技师协作:</span> 云端数据同步，允许多名技师远程协作诊断复杂故障
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-8">
+                        <a href="#" class="btn-secondary inline-block px-8 py-3 rounded-lg text-center font-bold">
+                            预约M500演示 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?auto=format&fit=crop&q=80" alt="M500系列" class="rounded-lg shadow-xl">
+                        <div class="absolute -top-4 -right-4 bg-orange-500 text-white px-4 py-4 rounded-full font-bold shadow-lg">
+                            新品
+                        </div>
+                        
+                        <!-- Feature Indicators -->
+                        <div class="absolute top-[20%] left-[10%] w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg cursor-pointer" data-tooltip="10英寸高清工业屏幕">
+                            <span class="text-white text-xs">1</span>
+                        </div>
+                        <div class="absolute top-[40%] right-[20%] w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg cursor-pointer" data-tooltip="全触控操作">
+                            <span class="text-white text-xs">2</span>
+                        </div>
+                        <div class="absolute bottom-[30%] left-[30%] w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg cursor-pointer" data-tooltip="安卓系统界面">
+                            <span class="text-white text-xs">3</span>
+                        </div>
+                        <div class="absolute bottom-[20%] right-[10%] w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg cursor-pointer" data-tooltip="云数据同步">
+                            <span class="text-white text-xs">4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                <span class="section-title">为什么全球技师信赖Jdiag？</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-6 rounded-lg text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">专业全面</h3>
+                    <p>覆盖全球主流摩托车品牌，支持EFI系统检测、电池测试、故障码读取等全方位诊断</p>
+                </div>
+                
+                <div class="card p-6 rounded-lg text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">简便高效</h3>
+                    <p>直观操作界面，快速故障排查，大幅提升维修效率</p>
+                </div>
+                
+                <div class="card p-6 rounded-lg text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">多语言支持</h3>
+                    <p>英语、中文、西班牙语、法语等多种语言界面，满足全球用户需求</p>
+                </div>
+                
+                <div class="card p-6 rounded-lg text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">持续升级</h3>
+                    <p>产品线不断更新迭代，技术支持及时到位</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6">用户价值</h3>
+                <p class="text-lg mb-6">无论您是专业维修技师还是摩托车爱好者，Jdiag诊断设备都能帮助您：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-lg flex items-start">
+                        <i class="fas fa-search-location text-blue-600 text-xl mt-1 mr-3"></i>
+                        <p class="text-lg">快速精准定位故障</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg flex items-start">
+                        <i class="fas fa-clock text-blue-600 text-xl mt-1 mr-3"></i>
+                        <p class="text-lg">显著节省维修时间和成本</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg flex items-start">
+                        <i class="fas fa-cogs text-blue-600 text-xl mt-1 mr-3"></i>
+                        <p class="text-lg">执行专业级服务程序</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg flex items-start">
+                        <i class="fas fa-chart-line text-blue-600 text-xl mt-1 mr-3"></i>
+                        <p class="text-lg">提升维修质量和效率</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Global Service Section -->
+    <section id="global" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">
+                <span class="section-title">多语言支持｜全球服务网络</span>
+            </h2>
+            <h3 class="text-2xl font-semibold text-center mb-16">12种操作语言｜36国认证｜7×24小时技术响应</h3>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="world-map">
+                        <!-- Map Points -->
+                        <div class="map-point" style="top: 30%; left: 20%;" title="北美"></div>
+                        <div class="map-point" style="top: 40%; left: 45%;" title="欧洲"></div>
+                        <div class="map-point" style="top: 35%; left: 75%;" title="亚洲"></div>
+                        <div class="map-point" style="top: 55%; left: 25%;" title="南美"></div>
+                        <div class="map-point" style="top: 60%; left: 65%;" title="大洋洲"></div>
+                        
+                        <!-- Map SVG -->
+                        <svg width="100%" height="100%" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+                            <path d="M110,125 Q300,75 450,125 T800,125" stroke="#0056b3" stroke-width="2" fill="none"/>
+                            <path d="M150,225 Q350,175 500,225 T850,225" stroke="#0056b3" stroke-width="2" fill="none"/>
+                            <path d="M200,325 Q400,275 550,325 T900,325" stroke="#0056b3" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <p class="text-lg leading-relaxed mb-8">
+                        无论是曼谷街头的维修铺，还是慕尼黑的哈雷定制工坊，Jdiag始终在线。我们的全球服务网络确保您随时获得所需的技术支持。
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold mb-2">产品支持的12种语言</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">英语</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">中文</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">西班牙语</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">法语</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">德语</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">意大利语</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">更多...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold mb-2">售后服务保障</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-headset text-blue-600 mr-2"></i>
+                                    7×24小时技术响应
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-tools text-blue-600 mr-2"></i>
+                                    免费固件升级
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-shield-alt text-blue-600 mr-2"></i>
+                                    2年产品质保
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-lg shadow-sm">
+                        <h4 class="font-bold mb-4">全球认证与合作</h4>
+                        <div class="flex items-center flex-wrap gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-certificate text-blue-600 text-2xl mr-2"></i>
+                                <span>ISO 9001</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-certificate text-blue-600 text-2xl mr-2"></i>
+                                <span>ISO 16949</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-handshake text-blue-600 text-2xl mr-2"></i>
+                                <span>BMW Motorrad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-20 bg-blue-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">行动呼吁区</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-12">
+                选择Jdiag，专业诊断尽在掌握！服务全球85个国家，拥有ISO 9001 & 16949认证，与BMW Motorrad技术实验室战略合作。
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-blue-700 px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition-all">
+                    立即获取适配车型清单
+                </a>
+                <a href="#" class="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition-all">
+                    预约M500演示
+                </a>
+                <a href="#" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition-all">
+                    下载技术白皮书
+                </a>
+            </div>
+            
+            <div class="mt-16 max-w-2xl mx-auto">
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <h3 class="text-xl font-bold mb-4 text-left">联系我们</h3>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="您的姓名" class="w-full px-4 py-2 rounded-lg text-gray-800">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="电子邮箱" class="w-full px-4 py-2 rounded-lg text-gray-800">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="公司名称" class="w-full px-4 py-2 rounded-lg text-gray-800">
+                    </div>
+                    <div>
+                        <select class="w-full px-4 py-2 rounded-lg text-gray-800">
+                            <option>您的需求</option>
+                            <option>产品咨询</option>
+                            <option>技术支持</option>
+                            <option>合作洽谈</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <textarea placeholder="请描述您的需求..." rows="4" class="w-full px-4 py-2 rounded-lg text-gray-800"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-orange-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition-all">
+                            提交信息
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关于Jdiag</h3>
+                    <p class="mb-4">全球领先的摩托车诊断设备制造商，致力于通过创新技术提升摩托车维修体验。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">产品系列</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">M100系列</a></li>
+                        <li><a href="#" class="hover:underline">M200系列</a></li>
+                        <li><a href="#" class="hover:underline">M300系列</a></li>
+                        <li><a href="#" class="hover:underline">M500系列</a></li>
+                        <li><a href="#" class="hover:underline">配件与耗材</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">技术支持</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">下载中心</a></li>
+                        <li><a href="#" class="hover:underline">车型库更新</a></li>
+                        <li><a href="#" class="hover:underline">常见问题</a></li>
+                        <li><a href="#" class="hover:underline">视频教程</a></li>
+                        <li><a href="#" class="hover:underline">技术论坛</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                            <span>全球总部：深圳市南山区科技园</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <span>+86 755-8888-7777</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2"></i>
+                            <span>info@jdiag-tech.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-headset mt-1 mr-2"></i>
+                            <span>7×24小时服务热线：400-888-7777</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-blue-600 text-center">
+                <p>&copy; 2023 Jdiag Technology Co., Ltd. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        // Check for system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Tooltip functionality for feature indicators
+        document.querySelectorAll('[data-tooltip]').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'bg-black text-white px-3 py-1 rounded text-sm absolute z-10';
+                tooltip.style.left = (this.offsetLeft + this.offsetWidth / 2) + 'px';
+                tooltip.style.top = (this.offsetTop - 30) + 'px';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.textContent = this.getAttribute('data-tooltip');
+                tooltip.id = 'current-tooltip';
+                document.body.appendChild(tooltip);
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                const tooltip = document.getElementById('current-tooltip');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+            });
+        });
+        
+        // Initialize Mermaid for diagrams if needed
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // Animate elements when they enter the viewport
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.card, .product-card, .section-title, .stat-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate-fade-in');
+                }
+            });
+        };
+        
+        // Run animation check on page load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
