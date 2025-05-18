@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About JDIAG - Our Story, Mission & Team | Global Motorcycle Diagnostics Leader</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --brand-green: #83b735;
+            --brand-dark: #1a2025;
+            --brand-light: #f8f9fa;
+            --brand-gray: #6c757d;
+            --brand-green-light: #a3d555;
+            --brand-green-dark: #638a28;
+        }
+
+        /* Base Elements */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .light-mode {
+            --bg-primary: var(--brand-light);
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #121212;
+            --text-secondary: #374151;
+            --text-tertiary: #4b5563;
+            --accent-color: var(--brand-green);
+        }
+
+        .dark-mode {
+            --bg-primary: var(--brand-dark);
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #e5e7eb;
+            --text-tertiary: #d1d5db;
+            --accent-color: var(--brand-green-light);
+        }
+
+        /* Custom Components */
+        .brand-btn {
+            background-color: var(--brand-green);
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(131, 183, 53, 0.2);
+        }
+
+        .brand-btn:hover {
+            background-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 3px;
+            width: 60px;
+            background-color: var(--brand-green);
+            border-radius: 2px;
+        }
+
+        .milestone-card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--bg-secondary);
+            border-left: 3px solid var(--brand-green);
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-5px) translateX(5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: var(--bg-secondary);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .team-card .social-icons {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(131, 183, 53, 0.9);
+            padding: 0.5rem 0;
+            transition: bottom 0.3s ease;
+        }
+
+        .team-card:hover .social-icons {
+            bottom: 0;
+        }
+
+        .value-card {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+        }
+
+        .value-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            border: 1px solid rgba(131, 183, 53, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--brand-green);
+        }
+
+        .animated-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animated-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation delay cascade */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Header animation */
+        .header-animated {
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--brand-green);
+            opacity: 0.3;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: var(--brand-green);
+            border: 4px solid var(--brand-green);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--bg-secondary);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive timeline adjustments */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                left: 0;
+            }
+            
+            .timeline-container::after {
+                left: 18px;
+            }
+            
+            .timeline-right::after {
+                left: 18px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+
+        /* Testimonial slider */
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(131, 183, 53, 0.3);
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slide-indicator.active {
+            background-color: var(--brand-green);
+            transform: scale(1.2);
+        }
+
+        /* Photo gallery */
+        .gallery-container {
+            columns: 3;
+            column-gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                columns: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                columns: 1;
+            }
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="light-mode bg-primary text-primary">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-md header-animated">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-tight" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#products" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Features</a>
+                    <a href="index.html#comparison" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Comparison</a>
+                    <a href="index.html#support" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Support</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:inline"></i>
+                    </button>
+                    
+                    <a href="become-dealer.html" class="hidden md:inline-block border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all py-2 px-4 rounded-md">
+                        Become a Dealer
+                    </a>
+                    
+                    <button class="md:hidden text-gray-700 dark:text-gray-300" id="mobile-menu-button">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html#products" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Features</a>
+                    <a href="index.html#comparison" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Comparison</a>
+                    <a href="index.html#support" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Support</a>
+                    <a href="become-dealer.html" class="brand-btn text-center mt-2">Become a Dealer</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern" width="4" height="4" patternUnits="userSpaceOnUse">
+                        <circle cx="1" cy="1" r="1" fill="#83b735" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern)" />
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-green bg-opacity-20 text-brand-green mb-4">
+                    <i class="fas fa-users mr-2"></i> Our Story
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+                    Pioneering Motorcycle <br>Diagnostics Since 2010
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                    From a small startup to a global leader, discover the journey, people, and values that drive JDIAG's commitment to revolutionizing motorcycle maintenance worldwide.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#our-story" class="brand-btn text-center">
+                        Our Journey <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#team" class="border-2 border-gray-300 dark:border-gray-600 hover:border-brand-green dark:hover:border-brand-green text-gray-700 dark:text-white hover:text-brand-green dark:hover:text-brand-green-light transition-all py-3 px-6 rounded-md text-center">
+                        Meet Our Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Overview Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2 animated-fade-in">
+                    <div class="inline-block">
+                        <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                            Who We Are
+                        </h2>
+                    </div>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+                        JDIAG is a global leader in motorcycle diagnostic technology, dedicated to empowering technicians and riders with intelligent solutions that make motorcycle maintenance more accurate, efficient, and accessible.
+                    </p>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+                        Founded in 2010 by a team of motorcycle enthusiasts and electronics engineers, we've grown from a small startup focused on basic diagnostic tools to an international company serving more than 30,000 professional technicians across 36 countries.
+                    </p>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        Our headquarters in Silicon Valley, California, houses our R&D center, while our manufacturing facilities in Shenzhen, China, produce our award-winning diagnostic equipment. With regional offices in Europe and Asia, we provide local support to our global network of users and distributors.
+                    </p>
+                </div>
+                
+                <div class="lg:w-1/2 grid grid-cols-2 gap-4 animated-fade-in delay-200">
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">13+</div>
+                        <p class="text-gray-600 dark:text-gray-400">Years of Innovation</p>
+                    </div>
+                    
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">100+</div>
+                        <p class="text-gray-600 dark:text-gray-400">Motorcycle Brands Supported</p>
+                    </div>
+                    
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">36</div>
+                        <p class="text-gray-600 dark:text-gray-400">Countries with Certified Products</p>
+                    </div>
+                    
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">30K+</div>
+                        <p class="text-gray-600 dark:text-gray-400">Professional Technicians Served</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values Section -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Mission & Values
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    The principles that guide our innovation and growth
+                </p>
+            </div>
+            
+            <div class="mb-20">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto shadow-lg animated-fade-in">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white text-center">Our Mission</h3>
+                    <blockquote class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 italic text-center mb-6">
+                        "To revolutionize motorcycle maintenance through intelligent diagnostic solutions that empower technicians and riders worldwide, ensuring every motorcycle receives scientific diagnosis and professional-grade repair."
+                    </blockquote>
+                    <div class="flex justify-center">
+                        <span class="inline-block w-20 h-1 bg-brand-green"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-10 text-gray-900 dark:text-white text-center">
+                Core Values That Drive Us
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="value-card shadow-lg animated-fade-in">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-bullseye text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Precision</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We believe accurate diagnostics are the foundation of quality repairs. Every product we design prioritizes precision and reliability to ensure technicians can make informed decisions.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-card shadow-lg animated-fade-in delay-100">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-lightbulb text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Innovation</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We constantly push the boundaries of what's possible in motorcycle diagnostics, investing heavily in R&D to develop new technologies that solve real-world maintenance challenges.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-card shadow-lg animated-fade-in delay-200">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-globe text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Global Perspective</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We design our products with a global mindset, ensuring they work across different motorcycle brands, languages, and regional requirements to serve technicians worldwide.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-card shadow-lg animated-fade-in delay-300">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-users text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Community</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We actively foster a global community of technicians and riders who share knowledge, best practices, and feedback that continually improves our products and services.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-card shadow-lg animated-fade-in delay-400">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-shield-alt text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Reliability</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We engineer our tools to withstand demanding workshop environments, with durability that professionals can count on day after day, year after year.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-card shadow-lg animated-fade-in delay-500">
+                    <div class="h-3 bg-brand-green"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-graduation-cap text-2xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white text-center">Education</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            We believe in empowering users through knowledge, providing comprehensive training and resources that elevate technical skills across the motorcycle repair industry.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Journey Section -->
+    <section id="our-story" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Our Journey
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    From garage startup to global leader
+                </p>
+            </div>
+            
+            <div class="timeline">
+                <!-- 2010 -->
+                <div class="timeline-container timeline-left animated-fade-in">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2010: The Beginning</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            JDIAG was founded by Michael Chen, a motorcycle enthusiast and electrical engineer who saw the need for better diagnostic tools in his local repair shop. With a small team of 5 people working from a garage in Silicon Valley, the first prototype of the M100 was developed.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2012 -->
+                <div class="timeline-container timeline-right animated-fade-in delay-100">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2012: First Major Success</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            After two years of development and testing, the M100 was officially launched and quickly gained popularity among local repair shops. By the end of the year, JDIAG had expanded to serve dealers across California and secured its first patent for EFI diagnostic technology.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2014 -->
+                <div class="timeline-container timeline-left animated-fade-in delay-200">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2014: International Expansion</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            With growing demand, JDIAG opened its first manufacturing facility in Shenzhen, China, and expanded sales to Europe and Asia. The company introduced multilingual support and adapted its products to work with European motorcycle brands.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2016 -->
+                <div class="timeline-container timeline-right animated-fade-in delay-300">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2016: Product Line Expansion</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            JDIAG introduced the M200 and M300 series, expanding its product range to serve different market segments. The company also established regional offices in Germany and Thailand to better support its growing international dealer network.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2018 -->
+                <div class="timeline-container timeline-left animated-fade-in delay-400">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2018: Technology Breakthrough</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            A significant breakthrough in injector waveform analysis technology led to the development of the M400 prototype. JDIAG also launched its cloud platform, allowing diagnostic data to be shared and analyzed across devices.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2020 -->
+                <div class="timeline-container timeline-right animated-fade-in delay-500">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2020: 10th Anniversary</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            JDIAG celebrated its 10th anniversary by launching the M400 series and reaching the milestone of serving 20,000 professional technicians worldwide. The company also received the "Innovation Excellence Award" from the International Motorcycle Repair Association.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2022 -->
+                <div class="timeline-container timeline-left animated-fade-in delay-600">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2022: Global Leadership</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            JDIAG expanded its coverage to support over 100 motorcycle brands worldwide and reached 30,000 professional users. The company also established new partnerships with major motorcycle manufacturers for direct integration of diagnostic protocols.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2023 -->
+                <div class="timeline-container timeline-right animated-fade-in delay-700">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">2023: Looking Forward</h3>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Today, JDIAG continues to innovate with new AI-powered diagnostic features, enhanced cloud connectivity, and expanded training programs for technicians. The company remains committed to its mission of revolutionizing motorcycle maintenance through intelligent diagnostic solutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team Section -->
+    <section id="team" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Leadership Team
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Meet the experts behind JDIAG's innovation
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- CEO -->
+                <div class="team-card shadow-lg animated-fade-in">
+                    <div class="relative">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen - CEO" class="w-full aspect-square object-cover">
+                        <div class="social-icons">
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1 text-gray-900 dark:text-white">Michael Chen</h3>
+                        <p class="text-brand-green font-medium mb-3">Founder & CEO</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Former motorcycle technician and electrical engineer with a passion for combining technology with hands-on repair experience. Michael has led JDIAG from a garage startup to a global leader.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- CTO -->
+                <div class="team-card shadow-lg animated-fade-in delay-100">
+                    <div class="relative">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson - CTO" class="w-full aspect-square object-cover">
+                        <div class="social-icons">
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1 text-gray-900 dark:text-white">Sarah Johnson</h3>
+                        <p class="text-brand-green font-medium mb-3">Chief Technology Officer</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            With a Ph.D. in Electrical Engineering and 15 years in automotive diagnostics, Sarah leads our R&D team in developing cutting-edge diagnostic algorithms and hardware solutions.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Global Sales -->
+                <div class="team-card shadow-lg animated-fade-in delay-200">
+                    <div class="relative">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Carlos Rodriguez - Global Sales" class="w-full aspect-square object-cover">
+                        <div class="social-icons">
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1 text-gray-900 dark:text-white">Carlos Rodriguez</h3>
+                        <p class="text-brand-green font-medium mb-3">VP of Global Sales</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Carlos brings over 20 years of experience in international business development, having previously built distribution networks across Europe and Asia for major automotive tool companies.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Product Development -->
+                <div class="team-card shadow-lg animated-fade-in delay-300">
+                    <div class="relative">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Mei Lin - Product Development" class="w-full aspect-square object-cover">
+                        <div class="social-icons">
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-gray-200 mx-2"><i class="fab fa-medium"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1 text-gray-900 dark:text-white">Mei Lin</h3>
+                        <p class="text-brand-green font-medium mb-3">Director of Product</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Mei oversees the entire product lifecycle from concept to market, ensuring that JDIAG tools meet the real-world needs of technicians while incorporating the latest technological innovations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-600 dark:text-gray-400 mb-6">
+                    Our leadership team is supported by over 120 talented engineers, designers, technicians, and customer support specialists across our global offices.
+                </p>
+                <a href="careers.html" class="brand-btn inline-flex items-center">
+                    <i class="fas fa-briefcase mr-2"></i> View Career Opportunities
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        What Our Partners Say
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Hear from technicians, dealers, and industry experts
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto testimonial-slider h-80 md:h-64">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide active">
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Testimonial" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Robert Anderson</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Master Technician, Harley-Davidson</p>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="flex text-brand-green">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <blockquote class="text-xl text-gray-600 dark:text-gray-400 italic mb-4">
+                            "I've been using JDIAG tools for over 7 years now, and they've completely transformed how we diagnose issues at our workshop. The accuracy and depth of diagnostics have increased our first-time fix rate by nearly 40%."
+                        </blockquote>
+                        <p class="text-gray-500 dark:text-gray-500">
+                            Working with the M300 and M400 series daily for high-end motorcycle diagnostics
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimonial" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Maria Gonzalez</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Owner, European Motorcycle Specialists</p>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="flex text-brand-green">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <blockquote class="text-xl text-gray-600 dark:text-gray-400 italic mb-4">
+                            "As both a JDIAG user and distributor, I've seen firsthand how these tools help technicians become more confident and efficient. Their multilingual support is a game-changer for our diverse staff."
+                        </blockquote>
+                        <p class="text-gray-500 dark:text-gray-500">
+                            JDIAG distributor for Spain and Portugal since 2016
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Testimonial" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Hiroshi Tanaka</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Technical Editor, Motorcycle Technology Magazine</p>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="flex text-brand-green">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <blockquote class="text-xl text-gray-600 dark:text-gray-400 italic mb-4">
+                            "I've tested nearly every motorcycle diagnostic tool on the market, and JDIAG consistently leads in innovation and reliability. Their R&D team has a remarkable ability to anticipate the industry's needs."
+                        </blockquote>
+                        <p class="text-gray-500 dark:text-gray-500">
+                            Reviewing JDIAG products since the original M100 series
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-8">
+                <div class="slide-indicator active" data-slide="0"></div>
+                <div class="slide-indicator" data-slide="1"></div>
+                <div class="slide-indicator" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Culture & Gallery Section -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Life at JDIAG
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Our culture, workspace, and community
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-10 mb-16">
+                <div class="md:w-1/2 animated-fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Our Culture</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        At JDIAG, we foster an environment that combines engineering precision with creative problem-solving. Our teams work collaboratively across disciplines and borders, with a shared passion for motorcycles and technology.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        We believe in a hands-on approach to innovation – our engineers and product designers regularly spend time in repair shops, working alongside technicians to understand their challenges and develop practical solutions.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Our diverse, global team brings together perspectives from different cultures, riding traditions, and technical backgrounds, creating a vibrant workplace where innovation thrives.
+                    </p>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4 text-gray-900 dark:text-white">Our commitment includes:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-check text-sm"></i>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-400">Continuous learning and development</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-check text-sm"></i>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-400">Work-life balance</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-check text-sm"></i>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-400">Sustainability in operations</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                    <i class="fas fa-check text-sm"></i>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-400">Community engagement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 animated-fade-in delay-200">
+                    <div class="gallery-container">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="JDIAG R&D Team" class="rounded-lg">
+                            <div class="gallery-caption">R&D Team testing prototypes</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="Team Meeting" class="rounded-lg">
+                            <div class="gallery-caption">Weekly strategy meeting</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Manufacturing Facility" class="rounded-lg">
+                            <div class="gallery-caption">Shenzhen manufacturing facility</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team Celebration" class="rounded-lg">
+                            <div class="gallery-caption">Celebrating product launch</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Industry Event" class="rounded-lg">
+                            <div class="gallery-caption">JDIAG booth at EICMA Milan</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1630395822970-acd6a28ecfb8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="Community Workshop" class="rounded-lg">
+                            <div class="gallery-caption">Community training program</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center animated-fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Join Our Team</h3>
+                <p class="max-w-3xl mx-auto text-gray-600 dark:text-gray-400 mb-8">
+                    We're always looking for talented individuals who share our passion for motorcycles and technology. Explore our current opportunities and join us in revolutionizing motorcycle diagnostics worldwide.
+                </p>
+                <a href="careers.html" class="brand-btn inline-flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i> View Open Positions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSR & Sustainability Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Our Commitment to Sustainability
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Building a responsible business for the future
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="milestone-card p-6 bg-white dark:bg-gray-900 shadow-lg animated-fade-in">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-4">
+                        <i class="fas fa-leaf text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Eco-Friendly Manufacturing</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Our Shenzhen facility operates with 50% renewable energy and follows strict waste reduction protocols. We've reduced our manufacturing carbon footprint by 35% since 2018.
+                    </p>
+                </div>
+                
+                <div class="milestone-card p-6 bg-white dark:bg-gray-900 shadow-lg animated-fade-in delay-100">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-4">
+                        <i class="fas fa-recycle text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Product Lifecycle Management</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        We design our products for longevity and offer trade-in programs for older models. All returned devices are either refurbished or responsibly recycled through certified partners.
+                    </p>
+                </div>
+                
+                <div class="milestone-card p-6 bg-white dark:bg-gray-900 shadow-lg animated-fade-in delay-200">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-4">
+                        <i class="fas fa-hands-helping text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Community Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Through our JDIAG Foundation, we provide diagnostic tools and technical training to vocational schools in underserved communities, helping create career opportunities in motorcycle repair.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="sustainability.html" class="brand-btn inline-flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i> Read Our Sustainability Report
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Connect With Us
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    We'd love to hear from you
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 text-center animated-fade-in">
+                    <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-map-marker-alt text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Global Headquarters</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        1234 Innovation Way<br>
+                        Silicon Valley, CA 94103<br>
+                        United States
+                    </p>
+                    <p class="mt-4 text-gray-500 dark:text-gray-500">
+                        Mon-Fri: 9:00 AM - 6:00 PM PST
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 text-center animated-fade-in delay-100">
+                    <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-phone-alt text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Contact Information</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">
+                        <span class="font-medium">General Inquiries:</span><br>
+                        info@jdiag.com<br>
+                        +1 (800) JDIAG-01
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">
+                        <span class="font-medium">Technical Support:</span><br>
+                        support@jdiag.com<br>
+                        +1 (800) JDIAG-02
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        <span class="font-medium">Dealer Relations:</span><br>
+                        dealers@jdiag.com<br>
+                        +1 (800) JDIAG-03
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 text-center animated-fade-in delay-200">
+                    <div class="w-16 h-16 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-globe text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Regional Offices</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-3">
+                        <span class="font-medium">Europe:</span><br>
+                        Innovationstrasse 42<br>
+                        80339 Munich, Germany
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-3">
+                        <span class="font-medium">Asia:</span><br>
+                        888 Technology Plaza<br>
+                        Shenzhen, 518000, China
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        <span class="font-medium">Southeast Asia:</span><br>
+                        72 Digital Park Avenue<br>
+                        Bangkok, 10330, Thailand
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 flex flex-col md:flex-row items-center justify-center gap-6">
+                <a href="contact.html" class="brand-btn inline-flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Contact Form
+                </a>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition & Awards Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Recognition & Awards
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Industry recognition of our innovation and quality
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-md transition-all hover:shadow-lg animated-fade-in">
+                    <div class="w-16 h-16 mx-auto mb-4">
+                        <i class="fas fa-award text-4xl text-brand-green"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Innovation Excellence</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">International Motorcycle Repair Association, 2020</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-md transition-all hover:shadow-lg animated-fade-in delay-100">
+                    <div class="w-16 h-16 mx-auto mb-4">
+                        <i class="fas fa-trophy text-4xl text-brand-green"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Best Diagnostic Tool</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">EICMA Milano Motorcycle Show, 2019 & 2022</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-md transition-all hover:shadow-lg animated-fade-in delay-200">
+                    <div class="w-16 h-16 mx-auto mb-4">
+                        <i class="fas fa-star text-4xl text-brand-green"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Product of the Year</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Motorcycle Technology Magazine, 2021</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 text-center shadow-md transition-all hover:shadow-lg animated-fade-in delay-300">
+                    <div class="w-16 h-16 mx-auto mb-4">
+                        <i class="fas fa-certificate text-4xl text-brand-green"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Tech Innovator</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Silicon Valley Tech Awards, 2018</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">Industry Certifications</h3>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <div class="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-gray-900 dark:text-white font-medium">ISO 9001</span>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-gray-900 dark:text-white font-medium">CE Certified</span>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-gray-900 dark:text-white font-medium">FCC Approved</span>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-gray-900 dark:text-white font-medium">RoHS Compliant</span>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-gray-900 dark:text-white font-medium">RED Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    Ready to Experience JDIAG Innovation?
+                </h2>
+                <p class="text-xl text-gray-300 mb-10">
+                    Join thousands of professional technicians worldwide who trust JDIAG for precise and efficient motorcycle diagnostics.
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="index.html#products" class="brand-btn text-center">
+                        Explore Our Products <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="become-dealer.html" class="border-2 border-white hover:border-brand-green hover:bg-brand-green text-white transition-all py-3 px-6 rounded-md text-center">
+                        Become a Dealer
+                    </a>
+                    <a href="contact.html" class="border-2 border-gray-600 hover:border-white text-gray-300 hover:text-white transition-all py-3 px-6 rounded-md text-center">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold tracking-tight mb-4" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Precision Diagnostics for Every Motorcycle. Empowering technicians worldwide with intelligent diagnostic solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Products</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M100 Series</a></li>
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M200 Series</a></li>
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M300 Series</a></li>
+                        <li><a href="index.html#new-release" class="hover:text-brand-green transition-colors">M400 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">M500 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">Comparison Chart</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#our-story" class="hover:text-brand-green transition-colors">Our Story</a></li>
+                        <li><a href="#team" class="hover:text-brand-green transition-colors">Leadership Team</a></li>
+                        <li><a href="careers.html" class="hover:text-brand-green transition-colors">Careers</a></li>
+                        <li><a href="news.html" class="hover:text-brand-green transition-colors">News & Press</a></li>
+                        <li><a href="become-dealer.html" class="hover:text-brand-green transition-colors">Become a Dealer</a></li>
+                        <li><a href="contact.html" class="hover:text-brand-green transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-green"></i>
+                            <span>Global Headquarters<br>1234 Innovation Way<br>Silicon Valley, CA 94103</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-brand-green"></i>
+                            <span>+1 (800) JDIAG-TECH</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-brand-green"></i>
+                            <span>info@jdiag.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        &copy; 2023 JDIAG Technology Inc. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-brand-green transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Cookie Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            themeVariables: {
+                primaryColor: '#83b735',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#638a28',
+                lineColor: '#83b735',
+                secondaryColor: '#a3d555',
+                tertiaryColor: '#f8f9fa'
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Intersection Observer for fade-in animations
+            const animatedElements = document.querySelectorAll('.animated-fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Testimonial slider functionality
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const slideIndicators = document.querySelectorAll('.slide-indicator');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                testimonialSlides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Remove active class from all indicators
+                slideIndicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                });
+                
+                // Show the selected slide and activate its indicator
+                testimonialSlides[index].classList.add('active');
+                slideIndicators[index].classList.add('active');
+                
+                // Update current slide index
+                currentSlide = index;
+            }
+            
+            // Add click event listeners to indicators
+            slideIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    clearInterval(slideInterval); // Clear the interval when manually changing slides
+                    showSlide(index);
+                    startSlideInterval(); // Restart the interval
+                });
+            });
+            
+            // Function to start the auto-slide interval
+            function startSlideInterval() {
+                slideInterval = setInterval(() => {
+                    let nextSlide = (currentSlide + 1) % testimonialSlides.length;
+                    showSlide(nextSlide);
+                }, 6000); // Change slide every 6 seconds
+            }
+            
+            // Start the auto-slide
+            startSlideInterval();
+            
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Initialize theme based on user preference or saved setting
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            }
+            
+            themeToggleBtn.addEventListener('click', function() {
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Offset for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
