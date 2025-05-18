@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a JDIAG Dealer - Partner With The Global Leader in Motorcycle Diagnostics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --brand-green: #83b735;
+            --brand-dark: #1a2025;
+            --brand-light: #f8f9fa;
+            --brand-gray: #6c757d;
+            --brand-green-light: #a3d555;
+            --brand-green-dark: #638a28;
+        }
+
+        /* Base Elements */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .light-mode {
+            --bg-primary: var(--brand-light);
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #121212;
+            --text-secondary: #374151;
+            --text-tertiary: #4b5563;
+            --accent-color: var(--brand-green);
+        }
+
+        .dark-mode {
+            --bg-primary: var(--brand-dark);
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #e5e7eb;
+            --text-tertiary: #d1d5db;
+            --accent-color: var(--brand-green-light);
+        }
+
+        /* Custom Components */
+        .brand-btn {
+            background-color: var(--brand-green);
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(131, 183, 53, 0.2);
+        }
+
+        .brand-btn:hover {
+            background-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 3px;
+            width: 60px;
+            background-color: var(--brand-green);
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--bg-secondary);
+            border: 1px solid rgba(131, 183, 53, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .benefit-card:hover {
+            border-left-color: var(--brand-green);
+            transform: translateX(5px);
+        }
+
+        .animated-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animated-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation delay cascade */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Input styling */
+        .custom-input {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #1a202c;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(131, 183, 53, 0.2);
+        }
+
+        .custom-input.dark {
+            background-color: #1f2937;
+            border-color: #4b5563;
+            color: #f3f4f6;
+        }
+
+        .custom-input.dark:focus {
+            border-color: var(--brand-green-light);
+            box-shadow: 0 0 0 3px rgba(163, 213, 85, 0.2);
+        }
+
+        .custom-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .custom-label.dark {
+            color: #d1d5db;
+        }
+
+        /* Custom select styling */
+        .custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        /* Checkbox styling */
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .dark .checkmark {
+            background-color: #1f2937;
+            border-color: #4b5563;
+        }
+
+        .custom-checkbox:hover input ~ .checkmark {
+            background-color: #f3f4f6;
+        }
+
+        .dark .custom-checkbox:hover input ~ .checkmark {
+            background-color: #374151;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+        }
+
+        .checkmark:after {
+            content: "";
+            display: none;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+            margin-left: 1.5rem;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--brand-green);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -2.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--brand-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Progress bar for application form */
+        .progress-container {
+            width: 100%;
+            background-color: #e2e8f0;
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .dark .progress-container {
+            background-color: #4b5563;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--brand-green);
+            transition: width 0.5s ease;
+        }
+
+        /* Header animation */
+        .header-animated {
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline {
+                margin-left: 0;
+                padding-left: 2rem;
+            }
+            
+            .timeline-marker {
+                left: -2rem;
+                width: 1.25rem;
+                height: 1.25rem;
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+    </style>
+</head>
+<body class="light-mode bg-primary text-primary">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-md header-animated">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-tight" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#products" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Features</a>
+                    <a href="index.html#comparison" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Comparison</a>
+                    <a href="index.html#support" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Support</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:inline"></i>
+                    </button>
+                    
+                    <a href="index.html#cta" class="hidden md:inline-block brand-btn">
+                        Main Site
+                    </a>
+                    
+                    <button class="md:hidden text-gray-700 dark:text-gray-300" id="mobile-menu-button">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html#products" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Features</a>
+                    <a href="index.html#comparison" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Comparison</a>
+                    <a href="index.html#support" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Support</a>
+                    <a href="index.html" class="brand-btn text-center mt-2">Main Site</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" class="w-full h-full" fill="#83b735">
+                <path d="M400,0C179.1,0,0,179.1,0,400s179.1,400,400,400s400-179.1,400-400S620.9,0,400,0z M400,600c-110.5,0-200-89.5-200-200 s89.5-200,200-200s200,89.5,200,200S510.5,600,400,600z"/>
+                <circle cx="400" cy="400" r="50"/>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-green bg-opacity-20 text-brand-green mb-4">
+                    <i class="fas fa-handshake mr-2"></i> Business Partnership
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+                    Become a JDIAG Authorized Dealer
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                    Join our global distribution network and bring professional motorcycle diagnostic solutions to your market. Grow your business with the industry leader.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#application-form" class="brand-btn text-center">
+                        Apply Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#benefits" class="border-2 border-gray-300 dark:border-gray-600 hover:border-brand-green dark:hover:border-brand-green text-gray-700 dark:text-white hover:text-brand-green dark:hover:text-brand-green-light transition-all py-3 px-6 rounded-md text-center">
+                        Dealer Benefits
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Partner With Us Section -->
+    <section id="benefits" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Why Partner With JDIAG?
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    As an authorized JDIAG dealer, you'll gain access to premium motorcycle diagnostic solutions and comprehensive business support.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-6 animated-fade-in">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">High-Growth Market</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        The motorcycle diagnostic market is growing at 8.5% CAGR globally, with particularly strong demand in emerging markets across Asia, Latin America, and Africa.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">Industry projected to reach $2.3B by 2028</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-6 animated-fade-in delay-100">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-tools text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Complete Product Range</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        From entry-level diagnostic tools to advanced professional systems, our product lineup allows you to serve all segments of the motorcycle repair market.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">50+ motorcycle brands supported</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-6 animated-fade-in delay-200">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-percentage text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Attractive Profit Margins</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Enjoy competitive wholesale pricing, volume-based discounts, and tiered commission structures designed to maximize your profitability as you grow.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">25-40% margin on all products</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-6 animated-fade-in delay-300">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Comprehensive Training</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Access product training, sales expertise development, and technical support preparation through our Dealer Academy program, available both online and in-person.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">Certified training for your sales team</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-6 animated-fade-in delay-400">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Marketing Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Receive ready-to-use marketing materials, co-marketing opportunities, and digital assets to boost your local promotional efforts and build brand awareness.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">Customizable marketing kit included</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card p-6 animated-fade-in delay-400">
+                    <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Protected Territories</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Depending on your market and commitment level, we offer territorial protection to ensure you can develop your business without direct competition from other dealers.
+                    </p>
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-sm text-brand-green font-medium">Exclusive regional distribution rights</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dealer Success Stories Section -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Dealer Success Stories
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Learn how our partners have grown their businesses with JDIAG
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-fade-in">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" alt="European Motorcycle Shop" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Dealer" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-xl">MotorTech Solutions</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Madrid, Spain • Dealer since 2018</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-gray-600 dark:text-gray-400 mb-6 italic">
+                            "Partnering with JDIAG transformed our business model. We've grown from a small parts supplier to the leading diagnostic service provider in Spain. Our revenue increased by 215% in just three years."
+                        </blockquote>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="text-brand-green mr-2 font-medium">Products:</span>
+                                <span class="text-gray-600 dark:text-gray-400">Full Range Distributor</span>
+                            </div>
+                            <div class="flex text-brand-green">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-fade-in delay-200">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570071677470-c04398af73ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" alt="Asian Motorcycle Shop" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Dealer" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-xl">SouthEast Diagnostics</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Bangkok, Thailand • Dealer since 2019</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-gray-600 dark:text-gray-400 mb-6 italic">
+                            "The motorcycle repair market in Southeast Asia is booming. JDIAG's multi-language support and specialized training helped us establish service centers in 5 countries. We've trained over 500 technicians and sold 1,200+ units in 2022 alone."
+                        </blockquote>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="text-brand-green mr-2 font-medium">Products:</span>
+                                <span class="text-gray-600 dark:text-gray-400">M200/M300 Specialist</span>
+                            </div>
+                            <div class="flex text-brand-green">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Performance Metrics -->
+            <div class="mt-16 bg-brand-green bg-opacity-10 rounded-xl p-8 animated-fade-in">
+                <h3 class="text-2xl font-bold mb-8 text-gray-900 dark:text-white text-center">
+                    Average JDIAG Dealer Performance Metrics
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">128%</div>
+                        <p class="text-gray-600 dark:text-gray-400">Year-over-Year Revenue Growth</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">32%</div>
+                        <p class="text-gray-600 dark:text-gray-400">Profit Margin</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">18+</div>
+                        <p class="text-gray-600 dark:text-gray-400">Months Average Customer Relationship</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-green mb-2">94%</div>
+                        <p class="text-gray-600 dark:text-gray-400">Dealer Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dealer Requirements & Application Process Section -->
+    <section class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Dealer Requirements & Process
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Here's what we look for in potential dealers and what you can expect in the application process
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2 animated-fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Ideal Dealer Profile</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="benefit-card bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                            <div class="flex items-start">
+                                <div class="mr-4 text-brand-green">
+                                    <i class="fas fa-store text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Established Business</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        Existing automotive or motorcycle parts/service business with proven track record, though we also consider strong new ventures with solid business plans.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                            <div class="flex items-start">
+                                <div class="mr-4 text-brand-green">
+                                    <i class="fas fa-users text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Industry Connections</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        Strong network within the motorcycle repair community and established relationships with service centers, repair shops, or technical schools.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                            <div class="flex items-start">
+                                <div class="mr-4 text-brand-green">
+                                    <i class="fas fa-dollar-sign text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Financial Capability</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        Ability to maintain adequate inventory levels and make initial minimum order commitment (varies by region and dealer tier).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                            <div class="flex items-start">
+                                <div class="mr-4 text-brand-green">
+                                    <i class="fas fa-handshake text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Commitment to Growth</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        Willingness to actively market JDIAG products, complete product training, and meet annual sales targets.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 animated-fade-in delay-200">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Application Process</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">1</div>
+                            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                                <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Application Submission</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                    Complete the dealer application form with your business details, market analysis, and sales projections.
+                                </p>
+                                <div class="text-sm text-gray-500 dark:text-gray-500">
+                                    <i class="far fa-clock mr-1"></i> Typical time: 15-20 minutes
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker">2</div>
+                            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                                <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Initial Review</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                    Our distributor relationship team will review your application and contact you for additional information if needed.
+                                </p>
+                                <div class="text-sm text-gray-500 dark:text-gray-500">
+                                    <i class="far fa-clock mr-1"></i> Response within: 3-5 business days
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker">3</div>
+                            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                                <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Business Consultation</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                    Virtual or in-person meeting to discuss territory, product mix, sales targets, and initial investment.
+                                </p>
+                                <div class="text-sm text-gray-500 dark:text-gray-500">
+                                    <i class="far fa-clock mr-1"></i> 60-90 minute meeting
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker">4</div>
+                            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                                <h4 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Agreement & Onboarding</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                    Upon approval, we'll prepare a dealer agreement, process your initial order, and begin the onboarding process.
+                                </p>
+                                <div class="text-sm text-gray-500 dark:text-gray-500">
+                                    <i class="far fa-clock mr-1"></i> Complete within: 2-3 weeks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dealer Tiers -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Dealer Partnership Tiers
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Choose the partnership level that aligns with your business goals and capabilities
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Authorized Dealer -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition-all hover:shadow-xl animated-fade-in">
+                    <div class="p-1 bg-gray-200 dark:bg-gray-700 text-center font-medium text-gray-700 dark:text-gray-300">
+                        ENTRY LEVEL
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Authorized Dealer</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Ideal for businesses entering the diagnostic market or focused on specific product lines.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Basic product offerings (M100/M200)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Standard dealer margins</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Online dealer training</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Digital marketing assets</span>
+                            </div>
+                            <div class="flex items-center opacity-50">
+                                <i class="fas fa-times text-gray-400 mr-3"></i>
+                                <span class="text-gray-500 dark:text-gray-500">No territorial exclusivity</span>
+                            </div>
+                            <div class="flex items-center opacity-50">
+                                <i class="fas fa-times text-gray-400 mr-3"></i>
+                                <span class="text-gray-500 dark:text-gray-500">Limited technical support access</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-gray-600 dark:text-gray-400">Minimum Initial Order:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$5,000 USD</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Annual Sales Target:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$20,000 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium Partner -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border-2 border-brand-green relative transition-all hover:shadow-xl transform hover:-translate-y-1 animated-fade-in delay-100">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-brand-green text-white px-3 py-1 rounded-full text-sm font-medium">
+                            MOST POPULAR
+                        </span>
+                    </div>
+                    <div class="p-1 bg-brand-green text-center font-medium text-white">
+                        RECOMMENDED
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Premium Partner</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            For established businesses ready to fully commit to growing with JDIAG products.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Full product line access</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Enhanced dealer margins (+5%)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">In-person training (1 session/year)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Co-marketing opportunities</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Regional exclusivity (city/province)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Priority technical support</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-gray-600 dark:text-gray-400">Minimum Initial Order:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$15,000 USD</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Annual Sales Target:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$60,000 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Elite Distributor -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition-all hover:shadow-xl animated-fade-in delay-200">
+                    <div class="p-1 bg-gray-800 text-center font-medium text-white">
+                        ADVANCED LEVEL
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Elite Distributor</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            For large enterprises with multi-region distribution capabilities and established networks.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Complete product ecosystem access</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Maximum margins + volume bonuses</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Dedicated account manager</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Custom marketing campaigns</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Country-wide or multi-country exclusivity</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-brand-green mr-3"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Direct factory relationship</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-gray-600 dark:text-gray-400">Minimum Initial Order:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$50,000 USD</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Annual Sales Target:</span>
+                                <span class="font-medium text-gray-900 dark:text-white">$200,000 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10 text-gray-600 dark:text-gray-400">
+                <p>*All figures are indicative. Specific requirements may vary by region. Contact us for details.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="application-form" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block mx-auto">
+                        <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                            Dealer Application Form
+                        </h2>
+                    </div>
+                    <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                        Take the first step toward becoming a JDIAG authorized dealer
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 md:p-10">
+                    <div class="mb-8">
+                        <div class="progress-container">
+                            <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-sm text-gray-500 dark:text-gray-400">
+                            <span>Business Information</span>
+                            <span>Market & Experience</span>
+                            <span>Partnership Goals</span>
+                        </div>
+                    </div>
+                    
+                    <form id="dealer-application-form">
+                        <!-- Step 1: Business Information -->
+                        <div class="form-step" id="step-1">
+                            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">Business Information</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="company_name" class="custom-label dark:custom-label-dark">Company Name*</label>
+                                    <input type="text" id="company_name" class="custom-input dark:custom-input-dark" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="year_established" class="custom-label dark:custom-label-dark">Year Established</label>
+                                    <input type="number" id="year_established" class="custom-input dark:custom-input-dark" min="1900" max="2023">
+                                </div>
+                                
+                                <div>
+                                    <label for="website" class="custom-label dark:custom-label-dark">Company Website</label>
+                                    <input type="url" id="website" class="custom-input dark:custom-input-dark">
+                                </div>
+                                
+                                <div>
+                                    <label for="business_type" class="custom-label dark:custom-label-dark">Business Type*</label>
+                                    <select id="business_type" class="custom-input custom-select dark:custom-input-dark" required>
+                                        <option value="">Select business type</option>
+                                        <option value="Motorcycle Shop">Motorcycle Shop</option>
+                                        <option value="Auto Parts Retailer">Auto Parts Retailer</option>
+                                        <option value="Repair Center">Repair Center</option>
+                                        <option value="Distributor">Distributor</option>
+                                        <option value="E-commerce">E-commerce</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="business_address" class="custom-label dark:custom-label-dark">Business Address*</label>
+                                <textarea id="business_address" rows="3" class="custom-input dark:custom-input-dark" required></textarea>
+                            </div>
+                            
+                            <h4 class="font-bold mb-4 text-gray-900 dark:text-white">Primary Contact Person</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="contact_name" class="custom-label dark:custom-label-dark">Full Name*</label>
+                                    <input type="text" id="contact_name" class="custom-input dark:custom-input-dark" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="contact_position" class="custom-label dark:custom-label-dark">Position*</label>
+                                    <input type="text" id="contact_position" class="custom-input dark:custom-input-dark" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="contact_email" class="custom-label dark:custom-label-dark">Email Address*</label>
+                                    <input type="email" id="contact_email" class="custom-input dark:custom-input-dark" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="contact_phone" class="custom-label dark:custom-label-dark">Phone Number*</label>
+                                    <input type="tel" id="contact_phone" class="custom-input dark:custom-input-dark" required>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end mt-8">
+                                <button type="button" id="step-1-next" class="brand-btn">
+                                    Continue <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Market & Experience -->
+                        <div class="form-step hidden" id="step-2">
+                            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">Market & Experience</h3>
+                            
+                            <div class="mb-6">
+                                <label for="market_region" class="custom-label dark:custom-label-dark">Primary Market Region*</label>
+                                <select id="market_region" class="custom-input custom-select dark:custom-input-dark" required>
+                                    <option value="">Select region</option>
+                                    <option value="North America">North America</option>
+                                    <option value="South America">South America</option>
+                                    <option value="Europe">Europe</option>
+                                    <option value="Middle East">Middle East</option>
+                                    <option value="Asia">Asia</option>
+                                    <option value="Africa">Africa</option>
+                                    <option value="Oceania">Oceania</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="countries_served" class="custom-label dark:custom-label-dark">Countries/States Served*</label>
+                                <input type="text" id="countries_served" class="custom-input dark:custom-input-dark" placeholder="e.g., California, Oregon, Washington" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="custom-label dark:custom-label-dark">Current Brands Carried</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="brands" value="Diagnostic Tools">
+                                        <span class="checkmark"></span>
+                                        Diagnostic Tools
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="brands" value="Motorcycle Parts">
+                                        <span class="checkmark"></span>
+                                        Motorcycle Parts
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="brands" value="Repair Equipment">
+                                        <span class="checkmark"></span>
+                                        Repair Equipment
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="brands" value="Motorcycle Accessories">
+                                        <span class="checkmark"></span>
+                                        Motorcycle Accessories
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="current_brands" class="custom-label dark:custom-label-dark">List Major Brands You Currently Distribute</label>
+                                <textarea id="current_brands" rows="3" class="custom-input dark:custom-input-dark" placeholder="e.g., Brand A, Brand B, Brand C"></textarea>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="years_experience" class="custom-label dark:custom-label-dark">Years of Experience in Motorcycle Industry*</label>
+                                <select id="years_experience" class="custom-input custom-select dark:custom-input-dark" required>
+                                    <option value="">Select experience</option>
+                                    <option value="<1">Less than 1 year</option>
+                                    <option value="1-3">1-3 years</option>
+                                    <option value="4-7">4-7 years</option>
+                                    <option value="8-15">8-15 years</option>
+                                    <option value=">15">More than 15 years</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="step-2-prev" class="border-2 border-gray-300 dark:border-gray-600 hover:border-brand-green dark:hover:border-brand-green text-gray-700 dark:text-white hover:text-brand-green dark:hover:text-brand-green-light transition-all py-3 px-6 rounded-md">
+                                    <i class="fas fa-arrow-left mr-2"></i> Back
+                                </button>
+                                <button type="button" id="step-2-next" class="brand-btn">
+                                    Continue <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Partnership Goals -->
+                        <div class="form-step hidden" id="step-3">
+                            <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">Partnership Goals</h3>
+                            
+                            <div class="mb-6">
+                                <label for="dealer_tier" class="custom-label dark:custom-label-dark">Preferred Dealer Tier*</label>
+                                <select id="dealer_tier" class="custom-input custom-select dark:custom-input-dark" required>
+                                    <option value="">Select dealer tier</option>
+                                    <option value="Authorized Dealer">Authorized Dealer</option>
+                                    <option value="Premium Partner">Premium Partner</option>
+                                    <option value="Elite Distributor">Elite Distributor</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="product_interest" class="custom-label dark:custom-label-dark">Primary Product Interest*</label>
+                                <select id="product_interest" class="custom-input custom-select dark:custom-input-dark" required>
+                                    <option value="">Select product line</option>
+                                    <option value="M100 Series">M100 Series (Entry Level)</option>
+                                    <option value="M200 Series">M200 Series (Mid Range)</option>
+                                    <option value="M300 Series">M300 Series (Professional)</option>
+                                    <option value="M400 Series">M400 Series (Premium)</option>
+                                    <option value="Full Range">Full Product Range</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="investment_ready" class="custom-label dark:custom-label-dark">Initial Investment Readiness*</label>
+                                <select id="investment_ready" class="custom-input custom-select dark:custom-input-dark" required>
+                                    <option value="">Select investment range</option>
+                                    <option value="<$5,000">Less than $5,000 USD</option>
+                                    <option value="$5,000-$15,000">$5,000 - $15,000 USD</option>
+                                    <option value="$15,000-$50,000">$15,000 - $50,000 USD</option>
+                                    <option value=">$50,000">More than $50,000 USD</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="sales_channels" class="custom-label dark:custom-label-dark">Primary Sales Channels*</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="channels" value="Physical Store">
+                                        <span class="checkmark"></span>
+                                        Physical Store
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="channels" value="E-commerce">
+                                        <span class="checkmark"></span>
+                                        E-commerce
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="channels" value="Wholesale to Shops">
+                                        <span class="checkmark"></span>
+                                        Wholesale to Shops
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="channels" value="Trade Shows">
+                                        <span class="checkmark"></span>
+                                        Trade Shows
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="additional_info" class="custom-label dark:custom-label-dark">Additional Information</label>
+                                <textarea id="additional_info" rows="4" class="custom-input dark:custom-input-dark" placeholder="Tell us more about your business and why you would be a good JDIAG dealer..."></textarea>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="terms_agree" required>
+                                    <span class="checkmark"></span>
+                                    I understand that this is an application only and does not guarantee dealer status. I confirm that all information provided is accurate.*
+                                </label>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="step-3-prev" class="border-2 border-gray-300 dark:border-gray-600 hover:border-brand-green dark:hover:border-brand-green text-gray-700 dark:text-white hover:text-brand-green dark:hover:text-brand-green-light transition-all py-3 px-6 rounded-md">
+                                    <i class="fas fa-arrow-left mr-2"></i> Back
+                                </button>
+                                <button type="submit" class="brand-btn">
+                                    Submit Application <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Success Message (hidden by default) -->
+                        <div class="form-step hidden text-center py-8" id="submission-success">
+                            <div class="w-20 h-20 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-check text-4xl text-brand-green"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Application Submitted Successfully!</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6">
+                                Thank you for your interest in becoming a JDIAG dealer. Our team will review your application and contact you within 3-5 business days.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                                Application Reference: <span class="font-medium text-brand-green" id="reference-number"></span>
+                            </p>
+                            <a href="index.html" class="brand-btn">
+                                Return to Main Site
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Common questions about our dealer program
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How long does the application process take?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The initial review takes 3-5 business days. If your application meets our criteria, we'll schedule a consultation within the following week. The entire process from application to onboarding typically takes 2-4 weeks.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Are there any fees to become a dealer?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        There are no application or recurring fees to become a JDIAG dealer. The only financial commitment is the initial product order and meeting annual sales targets to maintain your dealer status.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Do you provide product training?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Yes! All dealers receive access to our online training portal with product demos, technical guides, and sales training. Premium Partners and Elite Distributors also receive in-person training sessions at their location or at our regional offices.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> What marketing support do you provide?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        All dealers receive digital marketing assets including product images, videos, specifications, and promotional templates. Premium and Elite tiers receive additional support including co-marketing funds, customized campaigns, and event support.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Can I upgrade my dealer tier over time?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Absolutely! Many of our most successful partners started at the Authorized level and progressed to Premium or Elite status as their business grew. Tier reviews occur annually based on sales performance and market development.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How do warranty and repairs work?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        JDIAG provides a centralized RMA system for all warranty claims. Premium Partners and Elite Distributors can become certified service centers with the ability to handle repairs locally, backed by parts supply from JDIAG.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 dark:text-gray-400 mb-6">
+                    Have additional questions about becoming a JDIAG dealer?
+                </p>
+                <a href="mailto:dealer@jdiag.com" class="brand-btn">
+                    <i class="fas fa-envelope mr-2"></i> Contact Dealer Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    Ready to Grow Your Business With JDIAG?
+                </h2>
+                <p class="text-xl text-gray-300 mb-10">
+                    Join our global network of successful dealers and bring professional motorcycle diagnostics to your market.
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="#application-form" class="brand-btn text-center">
+                        Apply Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="index.html" class="border-2 border-white hover:border-brand-green hover:bg-brand-green text-white transition-all py-3 px-6 rounded-md text-center">
+                        Explore Products
+                    </a>
+                    <a href="mailto:dealer@jdiag.com" class="border-2 border-gray-600 hover:border-white text-gray-300 hover:text-white transition-all py-3 px-6 rounded-md text-center">
+                        Contact Dealer Team
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex flex-wrap justify-center gap-12">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-brand-green mb-1">30+</div>
+                        <p class="text-gray-400">Countries with Dealers</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-brand-green mb-1">500+</div>
+                        <p class="text-gray-400">Global Partners</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-brand-green mb-1">5+ Years</div>
+                        <p class="text-gray-400">Average Partnership Length</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold tracking-tight mb-4" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Precision Diagnostics for Every Motorcycle. Empowering technicians worldwide with intelligent diagnostic solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Products</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M100 Series</a></li>
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M200 Series</a></li>
+                        <li><a href="index.html#products" class="hover:text-brand-green transition-colors">M300 Series</a></li>
+                        <li><a href="index.html#new-release" class="hover:text-brand-green transition-colors">M400 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">M500 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">Comparison Chart</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Dealer Program</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#benefits" class="hover:text-brand-green transition-colors">Partnership Benefits</a></li>
+                        <li><a href="#application-form" class="hover:text-brand-green transition-colors">Application Process</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Dealer Resources</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Marketing Materials</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Dealer Portal Login</a></li>
+                        <li><a href="mailto:dealer@jdiag.com" class="hover:text-brand-green transition-colors">Contact Dealer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-green"></i>
+                            <span>Global Headquarters<br>1234 Innovation Way<br>Tech District, CA 94103</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-brand-green"></i>
+                            <span>+1 (800) JDIAG-TECH</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-brand-green"></i>
+                            <span>dealer@jdiag.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        &copy; 2023 JDIAG Technology Inc. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-brand-green transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Cookie Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            themeVariables: {
+                primaryColor: '#83b735',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#638a28',
+                lineColor: '#83b735',
+                secondaryColor: '#a3d555',
+                tertiaryColor: '#f8f9fa'
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Intersection Observer for fade-in animations
+            const animatedElements = document.querySelectorAll('.animated-fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Multi-step form functionality
+            const form = document.getElementById('dealer-application-form');
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            const success = document.getElementById('submission-success');
+            const progressBar = document.getElementById('progress-bar');
+            
+            // Step navigation buttons
+            const step1Next = document.getElementById('step-1-next');
+            const step2Prev = document.getElementById('step-2-prev');
+            const step2Next = document.getElementById('step-2-next');
+            const step3Prev = document.getElementById('step-3-prev');
+            
+            step1Next.addEventListener('click', function() {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                progressBar.style.width = '33%';
+            });
+            
+            step2Prev.addEventListener('click', function() {
+                step2.classList.add('hidden');
+                step1.classList.remove('hidden');
+                progressBar.style.width = '0%';
+            });
+            
+            step2Next.addEventListener('click', function() {
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+                progressBar.style.width = '66%';
+            });
+            
+            step3Prev.addEventListener('click', function() {
+                step3.classList.add('hidden');
+                step2.classList.remove('hidden');
+                progressBar.style.width = '33%';
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Generate a random reference number
+                const refNumber = 'JD' + new Date().getFullYear() + Math.floor(Math.random() * 10000);
+                document.getElementById('reference-number').textContent = refNumber;
+                
+                // Show success message
+                step3.classList.add('hidden');
+                success.classList.remove('hidden');
+                progressBar.style.width = '100%';
+                
+                // Reset form (optional)
+                form.reset();
+            });
+            
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Initialize theme based on user preference or saved setting
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                
+                // Update form input classes for dark mode
+                document.querySelectorAll('.custom-input').forEach(input => {
+                    input.classList.add('dark');
+                });
+                
+                document.querySelectorAll('.custom-label').forEach(label => {
+                    label.classList.add('dark');
+                });
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            }
+            
+            themeToggleBtn.addEventListener('click', function() {
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                    
+                    // Update form input classes for dark mode
+                    document.querySelectorAll('.custom-input').forEach(input => {
+                        input.classList.add('dark');
+                    });
+                    
+                    document.querySelectorAll('.custom-label').forEach(label => {
+                        label.classList.add('dark');
+                    });
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                    
+                    // Remove dark mode classes from form inputs
+                    document.querySelectorAll('.custom-input').forEach(input => {
+                        input.classList.remove('dark');
+                    });
+                    
+                    document.querySelectorAll('.custom-label').forEach(label => {
+                        label.classList.remove('dark');
+                    });
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Offset for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
