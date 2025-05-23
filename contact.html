@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact JDIAG - Get in Touch with Our Sales and Support Teams</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #83b735;
+            --brand-dark: #1a2025;
+            --brand-light: #f8f9fa;
+            --brand-gray: #6c757d;
+            --brand-green-light: #a3d555;
+            --brand-green-dark: #638a28;
+        }
+
+        /* Base Elements */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .light-mode {
+            --bg-primary: var(--brand-light);
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #121212;
+            --text-secondary: #374151;
+            --text-tertiary: #4b5563;
+            --accent-color: var(--brand-green);
+        }
+
+        .dark-mode {
+            --bg-primary: var(--brand-dark);
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #e5e7eb;
+            --text-tertiary: #d1d5db;
+            --accent-color: var(--brand-green-light);
+        }
+
+        /* Custom Components */
+        .brand-btn {
+            background-color: var(--brand-green);
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(131, 183, 53, 0.2);
+        }
+
+        .brand-btn:hover {
+            background-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .outline-btn {
+            border: 2px solid var(--brand-green);
+            color: var(--brand-green);
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+        }
+
+        .outline-btn:hover {
+            background-color: var(--brand-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 3px;
+            width: 60px;
+            background-color: var(--brand-green);
+            border-radius: 2px;
+        }
+
+        .contact-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--bg-secondary);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: rgba(131, 183, 53, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            color: var(--brand-green);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            background-color: var(--brand-green);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .contact-form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--bg-tertiary);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-form-input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(131, 183, 53, 0.2);
+        }
+
+        .contact-form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .input-error {
+            border-color: #e53e3e;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .animated-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animated-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation delay cascade */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Header animation */
+        .header-animated {
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Map container */
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            border-radius: 0.5rem;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Office location styling */
+        .location-tab {
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .location-tab:hover, .location-tab.active {
+            background-color: rgba(131, 183, 53, 0.1);
+        }
+
+        .location-tab.active {
+            border-left: 3px solid var(--brand-green);
+        }
+
+        /* Custom success message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--brand-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .success-message.visible {
+            transform: translateX(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+
+        /* Social media buttons */
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(131, 183, 53, 0.1);
+            color: var(--brand-green);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: var(--brand-green);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Live chat button */
+        .live-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background-color: var(--brand-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .live-chat-btn:hover {
+            background-color: var(--brand-green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .live-chat-btn {
+                padding: 0.5rem;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                justify-content: center;
+            }
+            
+            .live-chat-btn span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode bg-primary text-primary">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-md header-animated">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-tight" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="collection.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Features</a>
+                    <a href="support.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Support</a>
+                    <a href="about-us.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">About Us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:inline"></i>
+                    </button>
+                    
+                    <a href="become-dealer.html" class="hidden md:inline-block brand-btn">
+                        Become a Dealer
+                    </a>
+                    
+                    <button class="md:hidden text-gray-700 dark:text-gray-300" id="mobile-menu-button">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3">
+                    <a href="collection.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Features</a>
+                    <a href="support.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Support</a>
+                    <a href="about-us.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">About Us</a>
+                    <a href="become-dealer.html" class="brand-btn text-center mt-2">Become a Dealer</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto animated-fade-in">
+                <div class="inline-block mx-auto">
+                    <h1 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Contact Us
+                    </h1>
+                </div>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                    We're here to help! Whether you have questions about our products, need technical support, or want to become a dealer, our team is ready to assist you.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Cards Section -->
+    <section class="py-10 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Sales Contact -->
+                <div class="contact-card shadow-lg p-8 text-center animated-fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-briefcase text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Sales Inquiries</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Questions about our products, pricing, or becoming a dealer? Our sales team is here to help.
+                    </p>
+                    <div class="flex flex-col space-y-3">
+                        <a href="mailto:sales@jdiag.com" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-envelope mr-2"></i> sales@jdiag.com
+                        </a>
+                        <a href="tel:+18004232447" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-phone-alt mr-2"></i> +1 (800) JDIAG-SALES
+                        </a>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Monday-Friday: 9:00 AM - 6:00 PM (EST)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Technical Support -->
+                <div class="contact-card shadow-lg p-8 text-center animated-fade-in delay-100">
+                    <div class="contact-icon">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Technical Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Need help with your JDIAG device? Our technical support team is ready to assist you.
+                    </p>
+                    <div class="flex flex-col space-y-3">
+                        <a href="mailto:support@jdiag.com" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-envelope mr-2"></i> support@jdiag.com
+                        </a>
+                        <a href="tel:+18004232448" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-phone-alt mr-2"></i> +1 (800) JDIAG-TECH
+                        </a>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            24/7 Support Available
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Business Development -->
+                <div class="contact-card shadow-lg p-8 text-center animated-fade-in delay-200">
+                    <div class="contact-icon">
+                        <i class="fas fa-handshake text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Business Development</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Interested in partnering with JDIAG? Contact our business development team.
+                    </p>
+                    <div class="flex flex-col space-y-3">
+                        <a href="mailto:partnerships@jdiag.com" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-envelope mr-2"></i> partnerships@jdiag.com
+                        </a>
+                        <a href="tel:+18004232449" class="flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light">
+                            <i class="fas fa-phone-alt mr-2"></i> +1 (800) JDIAG-BIZ
+                        </a>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Monday-Friday: 9:00 AM - 5:00 PM (EST)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="animated-fade-in">
+                        <div class="inline-block">
+                            <h2 class="section-title text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                                Send Us a Message
+                            </h2>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-8">
+                            Fill out the form below, and our team will get back to you as soon as possible. We typically respond within 24 hours.
+                        </p>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="full-name" class="contact-form-label">Full Name <span class="text-red-500">*</span></label>
+                                    <input type="text" id="full-name" name="full-name" placeholder="Your full name" class="contact-form-input" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="contact-form-label">Email Address <span class="text-red-500">*</span></label>
+                                    <input type="email" id="email" name="email" placeholder="Your email address" class="contact-form-input" required>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="phone" class="contact-form-label">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Your phone number (optional)" class="contact-form-input">
+                                </div>
+                                <div>
+                                    <label for="inquiry-type" class="contact-form-label">Inquiry Type <span class="text-red-500">*</span></label>
+                                    <select id="inquiry-type" name="inquiry-type" class="contact-form-input" required>
+                                        <option value="">Select an option</option>
+                                        <option value="sales">Sales Inquiry</option>
+                                        <option value="support">Technical Support</option>
+                                        <option value="dealer">Become a Dealer</option>
+                                        <option value="partnership">Business Partnership</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="contact-form-label">Message <span class="text-red-500">*</span></label>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help you" class="contact-form-input" required></textarea>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="privacy-policy" name="privacy-policy" class="mt-1 mr-3" required>
+                                <label for="privacy-policy" class="text-gray-600 dark:text-gray-400 text-sm">
+                                    I have read and agree to the <a href="#" class="text-brand-green hover:underline">Privacy Policy</a> and consent to having my data processed as outlined therein.
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="brand-btn w-full md:w-auto">
+                                    <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="animated-fade-in delay-100">
+                        <div class="inline-block">
+                            <h2 class="section-title text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                                Global Presence
+                            </h2>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-8">
+                            With offices in North America, Europe, and Asia, we're positioned to serve our customers worldwide.
+                        </p>
+                        
+                        <div class="map-container mb-8">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423284.59051352614!2d-118.41173249999999!3d34.02016130000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1628521854492!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        
+                        <h3 class="font-bold text-lg mb-4 text-gray-900 dark:text-white">Our Offices</h3>
+                        
+                        <div class="space-y-4">
+                            <div id="usa-office" class="location-tab active" onclick="selectLocation('usa')">
+                                <h4 class="font-bold text-gray-900 dark:text-white">North America Headquarters</h4>
+                                <address class="text-gray-600 dark:text-gray-400 not-italic">
+                                    1234 Innovation Way<br>
+                                    Silicon Valley, CA 94103<br>
+                                    United States
+                                </address>
+                            </div>
+                            
+                            <div id="europe-office" class="location-tab" onclick="selectLocation('europe')">
+                                <h4 class="font-bold text-gray-900 dark:text-white">European Office</h4>
+                                <address class="text-gray-600 dark:text-gray-400 not-italic">
+                                    Innovationstrasse 42<br>
+                                    80339 Munich<br>
+                                    Germany
+                                </address>
+                            </div>
+                            
+                            <div id="asia-office" class="location-tab" onclick="selectLocation('asia')">
+                                <h4 class="font-bold text-gray-900 dark:text-white">Asia Pacific Office</h4>
+                                <address class="text-gray-600 dark:text-gray-400 not-italic">
+                                    888 Technology Plaza<br>
+                                    Shenzhen, 518000<br>
+                                    China
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect with Us Section -->
+    <section class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 animated-fade-in">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Connect With Us
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Follow us on social media for the latest updates, tips, and product announcements
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animated-fade-in delay-100">
+                <a href="#" class="contact-card shadow-lg p-6 text-center hover:bg-brand-green hover:text-white transition-colors">
+                    <div class="social-btn mx-auto mb-4">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1 text-gray-900 dark:text-white">Facebook</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">@JDIAGofficial</p>
+                </a>
+                
+                <a href="#" class="contact-card shadow-lg p-6 text-center hover:bg-brand-green hover:text-white transition-colors">
+                    <div class="social-btn mx-auto mb-4">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1 text-gray-900 dark:text-white">Twitter</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">@JDIAG</p>
+                </a>
+                
+                <a href="#" class="contact-card shadow-lg p-6 text-center hover:bg-brand-green hover:text-white transition-colors">
+                    <div class="social-btn mx-auto mb-4">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1 text-gray-900 dark:text-white">LinkedIn</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">JDIAG Technology</p>
+                </a>
+                
+                <a href="#" class="contact-card shadow-lg p-6 text-center hover:bg-brand-green hover:text-white transition-colors">
+                    <div class="social-btn mx-auto mb-4">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1 text-gray-900 dark:text-white">YouTube</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">JDIAG Official</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 animated-fade-in">
+                <div class="inline-block mx-auto">
+                    <h2 class="section-title text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
+                    Quick answers to common questions
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-6 animated-fade-in delay-100">
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How quickly can I expect a response?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        For general inquiries, we typically respond within 24 business hours. For urgent technical support, our team is available 24/7 and aims to respond within 4 hours.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> I need immediate technical assistance. What should I do?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        For immediate technical support, please call our 24/7 support line at +1 (800) JDIAG-TECH or use the live chat feature on our website. For the fastest resolution, please have your device serial number ready.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How do I become a JDIAG dealer?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        To become an authorized JDIAG dealer, select "Become a Dealer" from the inquiry type in our contact form, or visit our <a href="become-dealer.html" class="text-brand-green hover:underline">Dealer Program</a> page for detailed information and requirements.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Where can I find my device's serial number?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The serial number can be found on the back of your device, on the original packaging, or by navigating to Settings > About on your JDIAG diagnostic tool.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold tracking-tight mb-4" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Precision Diagnostics for Every Motorcycle. Empowering technicians worldwide with intelligent diagnostic solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Products</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M100 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M200 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M300 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M400 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M500 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">Comparison Chart</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Product Videos</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Software Downloads</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">User Manuals</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Troubleshooting</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Warranty Information</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Contact Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-green"></i>
+                            <span>Global Headquarters<br>1234 Innovation Way<br>Silicon Valley, CA 94103</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-brand-green"></i>
+                            <span>+1 (800) JDIAG-TECH</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-brand-green"></i>
+                            <span>info@jdiag.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        &copy; 2023 JDIAG Technology Inc. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-brand-green transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Cookie Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Button -->
+    <a href="#" class="live-chat-btn">
+        <i class="fas fa-comments mr-2"></i>
+        <span>Live Chat</span>
+    </a>
+
+    <!-- Success Message (Hidden by Default) -->
+    <div id="success-message" class="success-message">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span>Your message has been sent successfully! We'll be in touch soon.</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                let isValid = true;
+                const requiredFields = contactForm.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('input-error');
+                        
+                        // Add error message if it doesn't exist
+                        let errorMsg = field.parentNode.querySelector('.error-message');
+                        if (!errorMsg) {
+                            errorMsg = document.createElement('p');
+                            errorMsg.classList.add('error-message');
+                            errorMsg.textContent = 'This field is required';
+                            field.parentNode.appendChild(errorMsg);
+                        }
+                    } else {
+                        field.classList.remove('input-error');
+                        const errorMsg = field.parentNode.querySelector('.error-message');
+                        if (errorMsg) {
+                            errorMsg.remove();
+                        }
+                    }
+                });
+                
+                // Check email format
+                const emailField = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+                    isValid = false;
+                    emailField.classList.add('input-error');
+                    
+                    let errorMsg = emailField.parentNode.querySelector('.error-message');
+                    if (!errorMsg) {
+                        errorMsg = document.createElement('p');
+                        errorMsg.classList.add('error-message');
+                        errorMsg.textContent = 'Please enter a valid email address';
+                        emailField.parentNode.appendChild(errorMsg);
+                    } else {
+                        errorMsg.textContent = 'Please enter a valid email address';
+                    }
+                }
+                
+                if (isValid) {
+                    // In a real implementation, you would send the form data to your server here
+                    // For demo purposes, we'll just show the success message
+                    
+                    // Reset the form
+                    contactForm.reset();
+                    
+                    // Show success message
+                    successMessage.classList.add('visible');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.remove('visible');
+                    }, 5000);
+                }
+            });
+            
+            // Office location selection
+            window.selectLocation = function(location) {
+                // Remove active class from all location tabs
+                document.querySelectorAll('.location-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Add active class to selected tab
+                document.getElementById(`${location}-office`).classList.add('active');
+                
+                // Update map (in a real implementation, you would update the map src)
+                // For demo purposes, we're just showing which location was selected
+                console.log(`Selected location: ${location}`);
+            };
+            
+            // Intersection Observer for fade-in animations
+            const animatedElements = document.querySelectorAll('.animated-fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Initialize theme based on user preference or saved setting
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            }
+            
+            themeToggleBtn.addEventListener('click', function() {
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Field validation on input change
+            const formInputs = contactForm.querySelectorAll('input, textarea, select');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.hasAttribute('required') && this.value.trim()) {
+                        this.classList.remove('input-error');
+                        const errorMsg = this.parentNode.querySelector('.error-message');
+                        if (errorMsg) {
+                            errorMsg.remove();
+                        }
+                    }
+                    
+                    // Check email format on input change
+                    if (this.id === 'email' && this.value.trim()) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(this.value.trim())) {
+                            this.classList.add('input-error');
+                            
+                            let errorMsg = this.parentNode.querySelector('.error-message');
+                            if (!errorMsg) {
+                                errorMsg = document.createElement('p');
+                                errorMsg.classList.add('error-message');
+                                errorMsg.textContent = 'Please enter a valid email address';
+                                this.parentNode.appendChild(errorMsg);
+                            }
+                        } else {
+                            this.classList.remove('input-error');
+                            const errorMsg = this.parentNode.querySelector('.error-message');
+                            if (errorMsg) {
+                                errorMsg.remove();
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
