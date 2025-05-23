@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDIAG M400 PRO - Professional Motorcycle Diagnostic Tool with ECU Programming</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #83b735;
+            --brand-dark: #1a2025;
+            --brand-light: #f8f9fa;
+            --brand-gray: #6c757d;
+            --brand-green-light: #a3d555;
+            --brand-green-dark: #638a28;
+        }
+
+        /* Base Elements */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .light-mode {
+            --bg-primary: var(--brand-light);
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #121212;
+            --text-secondary: #374151;
+            --text-tertiary: #4b5563;
+            --accent-color: var(--brand-green);
+        }
+
+        .dark-mode {
+            --bg-primary: var(--brand-dark);
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #e5e7eb;
+            --text-tertiary: #d1d5db;
+            --accent-color: var(--brand-green-light);
+        }
+
+        /* Custom Components */
+        .brand-btn {
+            background-color: var(--brand-green);
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(131, 183, 53, 0.2);
+        }
+
+        .brand-btn:hover {
+            background-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .outline-btn {
+            border: 2px solid var(--brand-green);
+            color: var(--brand-green);
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+        }
+
+        .outline-btn:hover {
+            background-color: var(--brand-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(131, 183, 53, 0.25);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 3px;
+            width: 60px;
+            background-color: var(--brand-green);
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--bg-secondary);
+            border: 1px solid rgba(131, 183, 53, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            border-bottom-color: var(--brand-green);
+            color: var(--brand-green);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .spec-row {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+
+        .spec-row:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .product-thumbnail:hover, .product-thumbnail.active {
+            border-color: var(--brand-green);
+            transform: scale(1.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-new {
+            background-color: var(--brand-green);
+            color: white;
+        }
+
+        .badge-discount {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: var(--bg-tertiary);
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--brand-green);
+            border-radius: 9999px;
+        }
+
+        .comparison-check {
+            color: var(--brand-green);
+        }
+
+        .comparison-x {
+            color: #e53e3e;
+        }
+
+        .animated-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animated-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation delay cascade */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Header animation */
+        .header-animated {
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Product image zoom effect */
+        .zoom-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .zoom-image {
+            transition: transform 0.5s ease;
+        }
+
+        .zoom-container:hover .zoom-image {
+            transform: scale(1.1);
+        }
+
+        /* Add to cart animation */
+        .cart-animation {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cart-animation:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .cart-animation:active:after {
+            transform: scaleX(1);
+        }
+
+        /* Quantity selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--brand-green);
+            color: white;
+        }
+
+        .quantity-input {
+            width: 50px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .quantity-input:focus {
+            outline: none;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .product-thumbnails {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 16px;
+            }
+            
+            .product-thumbnail {
+                flex-shrink: 0;
+                margin-right: 8px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode bg-primary text-primary">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-md header-animated">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-tight" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="collection.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Features</a>
+                    <a href="support.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">Support</a>
+                    <a href="about-us.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium transition-colors">About Us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:inline"></i>
+                    </button>
+                    
+                    <a href="become-dealer.html" class="hidden md:inline-block brand-btn">
+                        Become a Dealer
+                    </a>
+                    
+                    <button class="md:hidden text-gray-700 dark:text-gray-300" id="mobile-menu-button">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3">
+                    <a href="collection.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Products</a>
+                    <a href="index.html#features" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Features</a>
+                    <a href="support.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">Support</a>
+                    <a href="about-us.html" class="text-gray-700 dark:text-gray-300 hover:text-brand-green dark:hover:text-brand-green-light font-medium py-2">About Us</a>
+                    <a href="become-dealer.html" class="brand-btn text-center mt-2">Become a Dealer</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-gray-100 dark:bg-gray-800 pt-24 pb-4">
+        <div class="container mx-auto px-4">
+            <nav class="text-sm">
+                <ol class="flex items-center flex-wrap">
+                    <li class="flex items-center">
+                        <a href="index.html" class="text-gray-500 dark:text-gray-400 hover:text-brand-green dark:hover:text-brand-green-light">Home</a>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="collection.html" class="text-gray-500 dark:text-gray-400 hover:text-brand-green dark:hover:text-brand-green-light">Products</a>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="collection.html" class="text-gray-500 dark:text-gray-400 hover:text-brand-green dark:hover:text-brand-green-light">Diagnostic Tools</a>
+                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
+                    </li>
+                    <li>
+                        <span class="text-brand-green font-medium">M400 PRO</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <section class="py-12 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-10">
+                <!-- Product Images -->
+                <div class="lg:w-1/2">
+                    <div class="product-image-container mb-4">
+                        <img id="main-product-image" src="https://images.unsplash.com/photo-1590538866459-63a7da1d93cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="JDIAG M400 PRO" class="w-full zoom-image rounded-lg shadow-lg">
+                    </div>
+                    <div class="product-thumbnails grid grid-cols-5 gap-3">
+                        <img src="https://images.unsplash.com/photo-1590538866459-63a7da1d93cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="JDIAG M400 PRO Front View" class="product-thumbnail active" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1581093458791-9b1cd0587d38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="JDIAG M400 PRO Side View" class="product-thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1588418319942-3e29fee05ad3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="JDIAG M400 PRO Interface" class="product-thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1592825570583-4967b72c4a6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="JDIAG M400 PRO Package Contents" class="product-thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1597424216844-c1d1ea60e337?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="JDIAG M400 PRO In Use" class="product-thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="lg:w-1/2">
+                    <div class="flex items-center mb-4">
+                        <span class="badge badge-new mr-3">NEW</span>
+                        <span class="badge badge-discount">SAVE $400</span>
+                    </div>
+                    
+                    <h1 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">
+                        JDIAG M400 PRO
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+                        Professional Motorcycle Diagnostic System with ECU Programming
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-baseline mb-1">
+                            <span class="old-price mr-3">$2,399.00</span>
+                            <span class="text-3xl font-bold text-gray-900 dark:text-white">$1,999.00</span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Free shipping worldwide | 2-year warranty included
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <div class="w-full max-w-xs">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">75% Sold</span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-fire-alt text-red-500 mr-1"></i> 
+                            High demand: 27 sold in the last 24 hours
+                        </p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="font-bold mb-3 text-gray-900 dark:text-white">Key Features:</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">8" HD Touchscreen with 1280×800 resolution</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Industry-leading coverage of 79 motorcycle brands</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Advanced ECU programming capabilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Multi-language support for global workshops</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Offline operation with 8GB storage capacity</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                            <div class="quantity-selector">
+                                <div class="quantity-btn" onclick="decrementQuantity()">-</div>
+                                <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="10">
+                                <div class="quantity-btn" onclick="incrementQuantity()">+</div>
+                            </div>
+                            <button class="brand-btn cart-animation flex-grow flex items-center justify-center">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                            </button>
+                        </div>
+                        <button class="outline-btn w-full mb-3">
+                            <i class="fas fa-bolt mr-2"></i> Buy Now
+                        </button>
+                        <button class="text-gray-600 dark:text-gray-400 hover:text-brand-green dark:hover:text-brand-green-light transition-colors text-sm flex items-center mx-auto">
+                            <i class="far fa-heart mr-2"></i> Add to Wishlist
+                        </button>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-truck text-brand-green text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">Free Shipping</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">2-5 business days</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-brand-green text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">2-Year Warranty</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Full coverage</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-undo text-brand-green text-2xl mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">30-Day Returns</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Money back guarantee</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Tabs Section -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                    <div class="flex overflow-x-auto">
+                        <div class="tab-btn active" data-tab="description">Description</div>
+                        <div class="tab-btn" data-tab="specifications">Specifications</div>
+                        <div class="tab-btn" data-tab="whatsinbox">What's in the Box</div>
+                        <div class="tab-btn" data-tab="comparison">Comparison</div>
+                        <div class="tab-btn" data-tab="reviews">Reviews</div>
+                    </div>
+                </div>
+                
+                <!-- Description Tab -->
+                <div id="description-tab" class="tab-content active p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Professional Motorcycle Diagnostics Reimagined</h2>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        The M400 PRO is the most comprehensive intelligent motorcycle diagnostic tool on the market, engineered for professional mechanics and passionate enthusiasts who demand precision, versatility, and reliability. With industry-leading brand coverage, advanced ECU programming capabilities, and a rugged design built for daily workshop use, the M400 PRO represents the pinnacle of motorcycle diagnostic technology.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="feature-card p-6 animated-fade-in">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-microchip text-2xl text-brand-green"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Advanced ECU Programming</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                Unlike other diagnostic tools, the M400 PRO offers full ECU programming capabilities, allowing you to:
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Fine-tune fuel maps for improved performance</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Adjust ignition timing for better power delivery</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Optimize throttle response for smoother operation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Install manufacturer updates and patches</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card p-6 animated-fade-in delay-100">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-globe text-2xl text-brand-green"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Unmatched Brand Coverage</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                The M400 PRO supports an industry-leading 79 motorcycle brands from around the world:
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">All major Japanese brands (Honda, Yamaha, Kawasaki, Suzuki)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">European premium brands (BMW, Ducati, KTM, Triumph, etc.)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">American manufacturers (Harley-Davidson, Indian, Victory)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">All major Chinese manufacturers</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="feature-card p-6 animated-fade-in delay-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-language text-2xl text-brand-green"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Multi-Language Support</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                Unlike the English-only M400 Online version, the M400 PRO offers comprehensive language options including:
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">English, Spanish, French, and German</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Italian, Chinese, and Japanese</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Russian, Portuguese, and more</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Easy language switching in the settings menu</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card p-6 animated-fade-in delay-300">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-green bg-opacity-20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-tools text-2xl text-brand-green"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Professional-Grade Diagnostics</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                Transform your workflow with comprehensive diagnostic capabilities:
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Complete fault code reading and clearing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Live data stream monitoring of all systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Advanced ABS system diagnostics</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                    <span class="text-gray-600 dark:text-gray-400">Complete battery and charging system analysis</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl animated-fade-in delay-400">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Durable Professional Design</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Engineered for daily use in demanding workshop environments, the M400 PRO features:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Rugged industrial-grade construction</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Operating temperature range of -30℃ to 70℃</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">IP67-rated for water and dust resistance</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Shock-resistant rubberized housing</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Long-lasting battery with 8+ hours of operation</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400">Ergonomic design for comfortable all-day use</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Specifications Tab -->
+                <div id="specifications-tab" class="tab-content p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Technical Specifications</h2>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                            Hardware Specifications
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Display</span>
+                                <p class="text-gray-600 dark:text-gray-400">8" HD Touchscreen (1280×800 resolution)</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Processor</span>
+                                <p class="text-gray-600 dark:text-gray-400">Quad-core high-speed processor</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Memory</span>
+                                <p class="text-gray-600 dark:text-gray-400">2GB RAM</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Storage</span>
+                                <p class="text-gray-600 dark:text-gray-400">8GB Internal Storage</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Battery</span>
+                                <p class="text-gray-600 dark:text-gray-400">5000mAh Lithium-ion (8+ hours operation)</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Connectivity</span>
+                                <p class="text-gray-600 dark:text-gray-400">Wi-Fi, USB, Bluetooth 5.0</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Operating Temperature</span>
+                                <p class="text-gray-600 dark:text-gray-400">-30℃ to 70℃</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Protection Rating</span>
+                                <p class="text-gray-600 dark:text-gray-400">IP67 (Water and dust resistant)</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Dimensions</span>
+                                <p class="text-gray-600 dark:text-gray-400">280mm × 180mm × 40mm</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Weight</span>
+                                <p class="text-gray-600 dark:text-gray-400">1.2kg</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                            Software Features
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Operating System</span>
+                                <p class="text-gray-600 dark:text-gray-400">Android intelligent OS</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Supported Languages</span>
+                                <p class="text-gray-600 dark:text-gray-400">English, Spanish, French, German, Italian, Chinese, Japanese, Russian, Portuguese</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Diagnostic Functions</span>
+                                <p class="text-gray-600 dark:text-gray-400">Read/clear codes, live data, ECU information, adaptation, actuation tests, ECU programming</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Special Functions</span>
+                                <p class="text-gray-600 dark:text-gray-400">Injector coding, TPS reset, Key programming, Service reset</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Supported Systems</span>
+                                <p class="text-gray-600 dark:text-gray-400">Engine, ABS, Instrument, Immobilizer, Battery, Fuel System</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Update Method</span>
+                                <p class="text-gray-600 dark:text-gray-400">Wi-Fi or USB</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Data Export</span>
+                                <p class="text-gray-600 dark:text-gray-400">PDF, CSV, Cloud Storage</p>
+                            </div>
+                            <div class="spec-row py-3">
+                                <span class="font-medium text-gray-900 dark:text-white">Offline Operation</span>
+                                <p class="text-gray-600 dark:text-gray-400">Full functionality without internet connection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                            Brand Coverage
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            The M400 PRO supports 79 motorcycle brands, including but not limited to:
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Honda</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Yamaha</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Kawasaki</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Suzuki</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Harley-Davidson</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">BMW</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Ducati</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">KTM</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Triumph</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Indian</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Aprilia</div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-center text-gray-600 dark:text-gray-400">Moto Guzzi</div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="text-brand-green hover:underline">
+                                <i class="fas fa-list-alt mr-1"></i> Download Full Brand List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- What's in the Box Tab -->
+                <div id="whatsinbox-tab" class="tab-content p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">What's in the Box</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1592825570583-4967b72c4a6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="M400 PRO Package Contents" class="rounded-lg shadow-lg mb-4">
+                        </div>
+                        <div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">M400 PRO Diagnostic Tablet</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Main diagnostic unit with 8" HD touchscreen</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">OBD-II Main Cable</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Primary connection cable for diagnostic port</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Brand-Specific Adapters (16)</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Set of adapters for connecting to various motorcycle brands</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">USB Cable for Updates</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">For connecting to PC and updating software</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">AC/DC Power Adapter</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">For charging the diagnostic tablet</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Hard Carrying Case</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Protective case for all components</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">User Manual and Quick Start Guide</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Comprehensive documentation for setup and operation</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">1-Year Software Subscription</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Free software updates for one year</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-green flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Warranty Card</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">2-year manufacturer warranty documentation</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl">
+                        <h3 class="font-bold text-lg mb-4 text-gray-900 dark:text-white">
+                            <i class="fas fa-info-circle text-brand-green mr-2"></i> Additional Information
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            The M400 PRO comes ready to use out of the box with the latest software pre-installed. For maximum coverage, we recommend checking for updates after first use to ensure you have the most current vehicle database and diagnostic functions.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            Optional accessories, including additional brand-specific adapters and extension cables, are available separately for specialized applications.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Comparison Tab -->
+                <div id="comparison-tab" class="tab-content p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Model Comparison</h2>
+                    
+                    <div class="overflow-x-auto mb-8">
+                        <table class="w-full border-collapse">
+                            <thead class="bg-gray-100 dark:bg-gray-800">
+                                <tr>
+                                    <th class="p-4 text-left text-gray-900 dark:text-white">Feature</th>
+                                    <th class="p-4 text-center text-gray-900 dark:text-white">M400 PRO</th>
+                                    <th class="p-4 text-center text-gray-900 dark:text-white">M400 Online</th>
+                                    <th class="p-4 text-center text-gray-900 dark:text-white">M300</th>
+                                    <th class="p-4 text-center text-gray-900 dark:text-white">M200 Plus</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Screen Size</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">8" (1280×800)</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">8" (1280×800)</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">5" Industrial Display</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">4.3" Display</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Language Support</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">English + Local Languages</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">English only</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">6 European Languages</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">3 Languages</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Supported Brands</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">79 brands</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">76 brands</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">25 brands</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">18 brands</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">ECU Programming</td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-times comparison-x"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-times comparison-x"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-times comparison-x"></i></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Offline Operation</td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-times comparison-x"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Operating System</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">Android intelligent OS</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">Android</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">Linux</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">Custom OS</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Operating Temperature</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">-30℃~70℃</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">-30℃~70℃</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">-40℃~70℃</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">-25℃~60℃</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Injector Testing</td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                    <td class="p-4 text-center"><i class="fas fa-check-circle comparison-check"></i></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td class="p-4 font-medium text-gray-900 dark:text-white">Price</td>
+                                    <td class="p-4 text-center font-medium text-brand-green">$1,999.00</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">$1,799.00</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">$1,299.00</td>
+                                    <td class="p-4 text-center text-gray-600 dark:text-gray-400">$899.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="bg-brand-green bg-opacity-10 dark:bg-opacity-20 p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-white">Why Choose the M400 PRO?</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            The M400 PRO offers several critical advantages over other models in the JDIAG lineup:
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400"><strong>Maximum Brand Coverage:</strong> With support for 79 brands, the M400 PRO covers 50 more brands than the M300 and a wider range of international manufacturers than the standard M400 Online.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400"><strong>ECU Programming Capability:</strong> The M400 PRO is the only model that offers full ECU programming functionality, a feature typically only available through dealer-specific tools.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400"><strong>Multilingual Support:</strong> Unlike the English-only M400 Online, the M400 PRO offers comprehensive language options for international users.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-brand-green mt-1 mr-2"></i>
+                                <span class="text-gray-600 dark:text-gray-400"><strong>Offline Operation:</strong> The M400 PRO functions fully without an internet connection, making it ideal for field work and remote locations.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Reviews Tab -->
+                <div id="reviews-tab" class="tab-content p-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Customer Reviews</h2>
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">4.7/5</span>
+                            <span class="text-gray-500 dark:text-gray-400 ml-2">(28 reviews)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 w-20">5 stars</span>
+                            <div class="flex-grow mx-3">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 w-10 text-right">78%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 w-20">4 stars</span>
+                            <div class="flex-grow mx-3">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 17%"></div>
+                                </div>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 w-10 text-right">17%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 w-20">3 stars</span>
+                            <div class="flex-grow mx-3">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 3%"></div>
+                                </div>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 w-10 text-right">3%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 w-20">2 stars</span>
+                            <div class="flex-grow mx-3">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 1%"></div>
+                                </div>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 w-10 text-right">1%</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-700 dark:text-gray-300 w-20">1 star</span>
+                            <div class="flex-grow mx-3">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 1%"></div>
+                                </div>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 w-10 text-right">1%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- Review 1 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <div class="flex items-center mb-2">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">James Wilson</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Master Technician - Verified Buyer</p>
+                                </div>
+                                <div class="ml-auto flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-2">
+                                The M400 PRO has completely changed how we approach motorcycle diagnostics at our shop. The ECU programming feature alone has allowed us to offer services we previously had to outsource to dealers. The coverage of both mainstream and exotic brands means we can work on virtually any bike that comes through our doors.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Build quality is exceptional—it's survived multiple drops on the shop floor without a scratch. The battery life is impressive too, lasting a full day of heavy use. Worth every penny for a professional workshop.
+                            </p>
+                            <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">Posted 3 weeks ago</div>
+                        </div>
+                        
+                        <!-- Review 2 -->
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <div class="flex items-center mb-2">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">Sarah Johnson</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Shop Owner - Verified Buyer</p>
+                                </div>
+                                <div class="ml-auto flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-2">
+                                As the owner of a European motorcycle specialist shop, I needed a tool that could handle everything from BMW to Ducati to Triumph. The M400 PRO delivers—and then some. The multilingual interface is a huge plus for our diverse staff, and the comprehensive diagnostics have increased our efficiency dramatically.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                The investment paid for itself within the first month through the additional services we can now offer in-house. Highly recommended for any serious motorcycle shop.
+                            </p>
+                            <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">Posted 1 month ago</div>
+                        </div>
+                        
+                        <!-- Review 3 -->
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">David Chen</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Performance Tuner - Verified Buyer</p>
+                                </div>
+                                <div class="ml-auto flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mb-2">
+                                The ECU programming capability on the M400 PRO is a game-changer for my performance tuning business. I can now make precise adjustments to fuel maps and timing that were previously impossible without sending the ECU to a specialist. The real-time data monitoring is excellent for dyno testing too.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                My only minor complaint is that some of the more obscure Japanese racing bikes could use deeper parameter access, but that's a very specialized need. For 99% of applications, this tool is outstanding.
+                            </p>
+                            <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">Posted 2 months ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <a href="#" class="outline-btn">
+                            <i class="fas fa-comment-alt mr-2"></i> Read All 28 Reviews
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="py-12 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-gray-900 dark:text-white">You May Also Like</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Related Product 1 -->
+                <div class="feature-card shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1546015018-8d2b76cbe993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Premium Carrying Case" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold mb-2 text-gray-900 dark:text-white">Premium Carrying Case</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            Waterproof hard shell case with custom foam inserts for the M400 PRO
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900 dark:text-white">$99.00</span>
+                            <button class="outline-btn py-1 px-3 text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Product 2 -->
+                <div class="feature-card shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1585909695452-2c5a71235907?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Extended Adapter Kit" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold mb-2 text-gray-900 dark:text-white">Extended Adapter Kit</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            8 additional brand-specific adapters for rare and exotic motorcycles
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900 dark:text-white">$149.00</span>
+                            <button class="outline-btn py-1 px-3 text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Product 3 -->
+                <div class="feature-card shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1646398442965-18e672256add?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Extended Software Subscription" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold mb-2 text-gray-900 dark:text-white">2-Year Software Update Plan</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            Extended software updates and support for an additional year
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900 dark:text-white">$299.00</span>
+                            <button class="outline-btn py-1 px-3 text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Product 4 -->
+                <div class="feature-card shadow-lg">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1601996759374-7d926f3f873d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Extension Cable" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold mb-2 text-gray-900 dark:text-white">Extension Cable Kit</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                            2-meter extension cables for hard-to-reach diagnostic ports
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900 dark:text-white">$69.00</span>
+                            <button class="outline-btn py-1 px-3 text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How often do I need to update the software?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        We recommend checking for updates monthly. Major updates with new vehicle models and features are typically released quarterly. Your M400 PRO includes free updates for the first year.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Is training available for this device?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Yes, we offer comprehensive online training resources with your purchase, including video tutorials and documentation. Premium in-person training is also available for an additional fee.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> What's the difference between the M400 PRO and M400 Online?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The M400 PRO includes advanced ECU programming capabilities, supports more languages, covers more brands, and works offline. The M400 Online requires constant internet connection and lacks ECU programming features.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> How much does it cost to renew the software subscription?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        After the included first year, annual software subscription renewal costs $299. Multi-year discounts are available, with 2-year plans at $499 (save $99) and 3-year plans at $699 (save $198).
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> Can I use this on multiple motorcycles?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Yes, the M400 PRO is designed for multi-brand diagnostics with no limits on the number of vehicles. With 79 brands supported, it works with virtually any motorcycle you'll encounter.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                    <h3 class="font-bold text-lg mb-3 text-gray-900 dark:text-white">
+                        <i class="fas fa-question-circle text-brand-green mr-2"></i> What if I need technical support?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Technical support is included with your purchase. Our support team is available via phone, email, and live chat. For complex issues, we also offer remote diagnostic assistance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold tracking-tight mb-4" style="color: #83b735;">
+                        <span class="text-3xl">J</span>DIAG
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Precision Diagnostics for Every Motorcycle. Empowering technicians worldwide with intelligent diagnostic solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-green hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Products</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M100 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M200 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M300 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M400 Series</a></li>
+                        <li><a href="collection.html" class="hover:text-brand-green transition-colors">M500 Series</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-brand-green transition-colors">Comparison Chart</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Product Videos</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Software Downloads</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">User Manuals</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Troubleshooting</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Warranty Information</a></li>
+                        <li><a href="support.html" class="hover:text-brand-green transition-colors">Contact Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-green"></i>
+                            <span>Global Headquarters<br>1234 Innovation Way<br>Tech District, CA 94103</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-brand-green"></i>
+                            <span>+1 (800) JDIAG-TECH</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-brand-green"></i>
+                            <span>sales@jdiag.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        &copy; 2023 JDIAG Technology Inc. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-brand-green transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Cookie Policy</a>
+                        <a href="#" class="hover:text-brand-green transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeImage(element) {
+            // Update main product image
+            document.getElementById('main-product-image').src = element.src;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+        
+        function incrementQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue < parseInt(input.max)) {
+                input.value = currentValue + 1;
+            }
+        }
+        
+        function decrementQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue > parseInt(input.min)) {
+                input.value = currentValue - 1;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle mobile menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Show the selected tab content and activate button
+                    document.getElementById(`${tabName}-tab`).classList.add('active');
+                    this.classList.add('active');
+                });
+            });
+            
+            // Intersection Observer for fade-in animations
+            const animatedElements = document.querySelectorAll('.animated-fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Initialize theme based on user preference or saved setting
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            }
+            
+            themeToggleBtn.addEventListener('click', function() {
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Quantity validation for input
+            const quantityInput = document.getElementById('quantity');
+            
+            quantityInput.addEventListener('change', function() {
+                let value = parseInt(this.value);
+                const min = parseInt(this.min);
+                const max = parseInt(this.max);
+                
+                if (isNaN(value) || value < min) {
+                    this.value = min;
+                } else if (value > max) {
+                    this.value = max;
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Offset for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
